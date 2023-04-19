@@ -6,14 +6,15 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 
 colored_output() {
-    local message=$1
-    local color=$2
-    case $color in
-        red)     echo "\e[31m$message\e[0m\n" ;;
-        green)   echo "\e[32m$message\e[0m\n" ;;
-        yellow)  echo "\e[33m$message\e[0m\n" ;;
-        blue)    echo "\e[34m$message\e[0m\n" ;;
-        *)       echo "$message\n" ;;
+    local text="$1"
+    local color="$2"
+
+    case "${color}" in
+        red)    echo -e "\033[31m${text}\033[0m" ;;
+        green)  echo -e "\033[32m${text}\033[0m" ;;
+        yellow) echo -e "\033[33m${text}\033[0m" ;;
+        blue)   echo -e "\033[34m${text}\033[0m" ;;
+        *)      echo "${text}" ;;
     esac
 }
 
