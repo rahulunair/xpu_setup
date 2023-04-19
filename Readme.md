@@ -13,15 +13,16 @@ The **'xpu\_setup'** repository has the following structure:
 ```bash
 xpu_setup/
 ├── base
-│   ├── basekit_setup.sh
-│   ├── conda_setup.sh
-│   ├── env_dev_utils.sh
-│   ├── gpu_drivers.sh
-│   ├── hold-packages.sh
-│   ├── init.sh
-│   ├── kernel_setup.sh
-│   ├── motd_setup.sh
-│   └── Readme.md
+│   ├── basekit_setup.sh
+│   ├── cleanup.sh
+│   ├── conda_setup.sh
+│   ├── env_dev_utils_setup.sh
+│   ├── gpu_drivers_setup.sh
+│   ├── hold-packages.sh
+│   ├── init_setup.sh
+│   ├── kernel_setup.sh
+│   ├── motd_setup.sh
+│   └── Readme.md
 └── Readme.md
 ```
 
