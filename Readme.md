@@ -27,7 +27,7 @@ xpu_setup/
 
 ### How to setup and configure?
 
-To follow along and setup a server with intel descrete GPUs:
+To follow along and setup a server with intel descrete GPUs and base configuration:
 
 Clone the repository:
 
