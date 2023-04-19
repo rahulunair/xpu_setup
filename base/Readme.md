@@ -38,7 +38,16 @@ sudo ./gpu_drivers_setup.sh
 
 This script will install the required kernel modules for the kernel to recognize the GPU, as well as runtime and developer drivers.
 
-4.  Set Up the Environment and Developer Utilities
+
+4. Hold kernel and kernel modules
+
+Let's mark and hold the kernel and kernel modules, so that these packages are not updates without the user directly choosing to do so.
+
+```bash
+sudo ./hold-packages.sh
+```
+
+5.  Set Up the Environment and Developer Utilities
 
 ```bash
 sudo ./env_dev_utils_setup.sh
@@ -46,7 +55,7 @@ sudo ./env_dev_utils_setup.sh
 
 This script will create a user named **'devcloud'**, install Docker, set up CPU scaling governors for performance, and add the **'devcloud'** user to the **'render'** and **'docker'** groups. It will also install essential developer utilities.
 
-5.  Set Up Miniconda and Install Required Packages
+6.  Set Up Miniconda and Install Required Packages
 
 ```bash
 sudo ./conda_setup.sh
@@ -54,7 +63,7 @@ sudo ./conda_setup.sh
 
 This script will install Miniconda to the **'devcloud'** environment and install packages like JupyterHub and IPython to the base environment.
 
-6.  Install Packages from Intel Basekit
+7.  Install Packages from Intel Basekit
 
 ```bash
 sudo ./basekit_setup.sh
@@ -62,13 +71,21 @@ sudo ./basekit_setup.sh
 
 This script will add Intel Basekit repositories and install core packages from the Intel Basekit.
 
-7.  Set Up the Message of the Day
+8.  Set Up the Message of the Day
 
 ```bash
 sudo ./motd_setup.sh
 ```
 
 This script will set up a message of the day for the devcloud user, displaying the available GPU and CPU, along with instructions on using oneAPI and how to get other oneAPI packages.
+
+9. Cleanup
+
+Finally, lets update and remove any packages that can be autoremoved
+
+```bash
+sudo ./cleanup.sh
+```
 
 #### Conculsion
 
