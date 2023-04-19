@@ -23,6 +23,7 @@ install_miniconda() {
     chmod +x Miniconda3-latest-Linux-x86_64.sh
     sudo -u devcloud ./Miniconda3-latest-Linux-x86_64.sh -b -p /home/devcloud/miniconda
     sudo -u devcloud /home/devcloud/miniconda/bin/conda init bash
+    sudo rm -rf ./Miniconda3-latest-Linux-x86_64.sh
 }
 
 install_packages() {
