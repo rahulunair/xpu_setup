@@ -28,7 +28,7 @@ This script will set up the recommended kernel, make it the default kernel, and 
 
 3.  Set Up GPU Drivers
 
-Warning: The system will reboot after this stage to ensure that the gpu drivers is setup correctly.
+**Warning:** The system will reboot after this stage to ensure that the gpu drivers is setup correctly.
 
 Set up kernel mode and user mode drivers from Intel GPU repositories:
 
