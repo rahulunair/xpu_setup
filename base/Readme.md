@@ -4,7 +4,7 @@ Step-by-Step Setup Instructions to setup the base envinronment for Intel dGPUs w
 
 #### Setup process
 
-**Follow these steps in the order presented** to set up your Intel GPU Max dGPU server:
+⚠️Warning: **Follow these steps in the order presented to set up your Intel GPU Max dGPU server** ⚠️Warning.
 
 1.  Initialize the Environment
 
