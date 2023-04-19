@@ -1,4 +1,5 @@
 #!/bin/bash
+
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 alias sudo="sudo -E"

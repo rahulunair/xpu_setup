@@ -1,5 +1,10 @@
 #!/bin/bash
 
+set -e
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+alias sudo="sudo -E"
+
 colored_output() {
     text=$1
     color=$2
