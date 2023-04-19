@@ -31,12 +31,14 @@ install_packages() {
     sudo -u devcloud /home/devcloud/miniconda/bin/pip install ipywidgets ipython
 }
 
-if ! command -v conda &> /dev/null; then
-    install_miniconda
-else
-    colored_output "Miniconda is already installed." yellow
-fi
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if ! command -v conda &> /dev/null; then
+        install_miniconda
+    else
+        colored_output "Miniconda is already installed." yellow
+    fi
 
-install_packages
-colored_output "Installation completed!" green
+    install_packages
+    colored_output "Installation completed!" green
+fi
 

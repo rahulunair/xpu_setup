@@ -4,7 +4,6 @@ export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 
-
 colored_output() {
     text=$1
     color=$2
@@ -17,15 +16,16 @@ colored_output() {
     esac
 }
 
-colored_output "Adding Intel oneAPI repository..." blue
-wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-sudo rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+add_intel_repository() {
+    colored_output "Adding Intel oneAPI repository..." blue
+    wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    sudo rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+}
 
 install_packages() {
     colored_output "Installing Intel Base Kit packages..." blue
-
     sudo apt-get install -y \
         intel-oneapi-common-vars \
         intel-oneapi-common-licensing \
@@ -42,9 +42,11 @@ install_packages() {
         intel-oneapi-mkl-devel
 }
 
-colored_output "Updating package index..." blue
-sudo apt-get update
-
-install_packages
-colored_output "Installation completed!" green
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    colored_output "Updating package index..." blue
+    sudo apt-get update
+    add_intel_repository
+    install_packages
+    colored_output "Installation completed!" green
+fi
 
