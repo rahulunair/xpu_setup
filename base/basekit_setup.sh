@@ -22,6 +22,7 @@ add_intel_repository() {
     sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
     sudo rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
     echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+    sudo apt update
 }
 
 install_packages() {
