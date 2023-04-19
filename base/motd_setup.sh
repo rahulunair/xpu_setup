@@ -65,9 +65,10 @@ echo ""
 echo -e "---------------------------------------------------------------------"
 EOF
 
+sudo apt install -y update-motd
+sudo find /etc/update-motd.d/ -type f ! -name '00-custom' -exec rm {} +
 sudo mv custom_motd.sh /etc/update-motd.d/99-custom
 sudo chmod 755 /etc/update-motd.d/99-custom
-sudo find /etc/update-motd.d/ -type f ! -name '00-custom' -exec rm {} +
 sudo /usr/sbin/update-motd
 
 
