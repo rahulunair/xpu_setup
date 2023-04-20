@@ -74,6 +74,11 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 colored_output "Adding ${USERNAME} to docker and render groups..." blue
 sudo usermod -aG docker,render ${USERNAME}
 
+# install xpu-smi
+wget https://github.com/intel/xpumanager/releases/download/V1.2.7/xpu-smi_1.2.7_20230406.084158.3d989a61_u22.04_amd64.deb
+sudo apt install -y ./xpu-smi_1.2.7_20230406.084158.3d989a61_u22.04_amd64.deb
+sudo rm -rf ./xpu-smi_1.2.7_20230406.084158.3d989a61_u22.04_amd64.deb
+
 # inform user
 colored_output "Cleanup..." blue
 sudo apt autoremove
