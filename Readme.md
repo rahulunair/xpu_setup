@@ -4,7 +4,7 @@ This guide provides step-by-step instructions for setting up an Intel GPU Max dG
 
 ### Prerequisites
 
-Before you begin, ensure that you have set up the base operating system using the Ubuntu cloud image for Jammy (22.04) from the following link: https://cloud-images.ubuntu.com/jammy/current/
+Before you begin, ensure that you have set up the base operating system using the Ubuntu cloud image for Jammy (22.04) from the following link: https://cloud-images.ubuntu.com/jammy/current/ and is connected to the internet.
 
 ### xpu\_setup Repository Structure
 
