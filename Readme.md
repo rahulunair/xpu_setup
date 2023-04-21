@@ -34,7 +34,7 @@ To follow along and setup a server with intel descrete GPUs and base configurati
 Clone the repository:
 
 ```bash
-git clone https://github/unrahul/xpu_setup
+git clone https://github/rahulunair/xpu_setup
 ```
 Optional step:
 
