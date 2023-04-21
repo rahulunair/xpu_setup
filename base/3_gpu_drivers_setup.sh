@@ -35,7 +35,7 @@ colored_output "Adding package repository..." blue
 sudo apt-get install -y gpg-agent wget
 wget -qO - "${REPO_KEY_URL}" | \
   sudo gpg --dearmor | sudo sh -c "cat > /usr/share/keyrings/intel-graphics.gpg"
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] ${REPO_URL}/ubuntu jammy max" | \
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] ${REPO_URL}/ubuntu jammy flex" | \
   sudo tee "${REPO_LIST_FILE}"
 
 # Install dependencies
