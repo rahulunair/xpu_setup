@@ -4,7 +4,6 @@ cat >custom_motd.sh <<'EOF'
 #!/bin/bash
 echo 
 echo -e "---------------------------------------------------------------------"
-echo -e "\033[1;32mWelcome to the Intel Developer Cloud!\033[0m"
 echo ""
 echo -e "\033[1;33mWARNING:\033[0m Kernel and GPU drivers have been intentionally held back."
 echo -e "Feel free to update the system, but please \033[1;31mrefrain from changing\033[0m the kernel and GPU"
