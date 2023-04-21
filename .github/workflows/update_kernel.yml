@@ -22,7 +22,7 @@ jobs:
         pip install beautifulsoup4
     - name: Update kernel information in script
       run: |
-        python utils/update_kernel_info.py
+        python utils/update_kernel.py
     - name: Commit and push changes
       run: |
         git config user.name "GitHub Actions Bot"
