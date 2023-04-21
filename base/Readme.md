@@ -85,9 +85,3 @@ Finally, lets update and remove any packages that can be autoremoved
 ```bash
 sudo ./9_cleanup.sh
 ```
-
-After the setup is complete, you can verify if the GPU is setup correctly using the tool [xpu\_verify](https://github.com/rahulunair/xpu_verify). Also, you can use clinfo, hwinfo to check if the dGPU is enumerated.
-
-#### Conculsion
-
-The provided documentation covers each step in detail, ensuring a smooth setup process. If you encounter any issues during the setup or have any questions, please do not hesitate to raise an issue on the GitHub repository. This will help us improve the documentation and address any potential problems promptly.
