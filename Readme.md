@@ -1,4 +1,4 @@
-## Unofficial Intel discrete GPU Setup Guide for Linux
+## Unofficial Intel discrete GPU Setup Guide for Linux*
 
 This guide provides step-by-step instructions for setting up an Intel discrete GPUs on Ubuntu 22.04. This repository contains a series of scripts that automate the configuration process, making it easier and more efficient. Depending on your specific dGPU, you can use one of the following branches:
 
@@ -49,3 +49,4 @@ Change directory to base inside xpu\_setup and follow the Readme.md inside 'base
 ```bash
 cd xpu_verify/base
 ```
+* I have tried to be as faithful as i can to the [official guide](https://dgpu-docs.intel.com/installation-guides/index.html), but added some additional bits to make life easier.
