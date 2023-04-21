@@ -23,15 +23,18 @@ colored_output "Updating system..." blue
 sudo apt-get update &&\
     sudo apt-get upgrade -y
 
-# Install the kernel and headers
-KERNEL_VERSION="5.15.0-57"
-colored_output "Checking if kernel ${KERNEL_VERSION}-generic is installed..." blue
+# Install the kernel and headers, try to get the latest from the docs, if not use default
+KERNEL_URL="https://dgpu-docs.intel.com/_sources/installation-guides/ubuntu/ubuntu-jammy-max.md.txt"
+KERNEL_NAME=$(curl -s "${KERNEL_URL}" | grep -o "install-suggests linux-image-.*-generic" | awk -F' ' '{print $2}') || KERNEL_NAME="linux-image-5.15.0-57-generic"
+KERNEL_VERSION=$(echo $KERNEL_NAME | awk -F'-' '{print $3"-"$4}') || KERNEL_VERSION="5.15.0-57"
 
-if dpkg -l | grep -q "linux-image-${KERNEL_VERSION}-generic"; then
-    colored_output "Kernel ${KERNEL_VERSION}-generic is already installed." yellow
+colored_output "Checking if kernel ${KERNEL_NAME} is installed..." blue
+
+if dpkg -l | grep -q "${KERNEL_NAME}"; then
+    colored_output "Kernel ${KERNEL_NAME} is already installed." yellow
 else
     colored_output "Installing kernel ${KERNEL_VERSION}-generic..." blue
-    sudo apt-get install -y --install-suggests "linux-image-${KERNEL_VERSION}-generic"
+    sudo apt-get install -y --install-suggests "${KERNEL_NAME}"
 fi
 
 colored_output "Setting kernel ${KERNEL_VERSION}-generic as the default kernel..." blue
