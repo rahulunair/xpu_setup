@@ -14,20 +14,18 @@ Make sure to setup the base operating system on your machine using a variant of 
 
 The essential components for setting up a GPU device in the repo has the following structure:
 
-```bash
-xpu_setup/
-├── base
-│   ├── 1_init_setup.sh
-│   ├── 2_kernel_setup.sh
-│   ├── 3_gpu_drivers_setup.sh
-│   ├── 4_hold-packages.sh
-│   ├── 5_env_dev_utils_setup.sh
-│   ├── 6_conda_setup.sh
-│   ├── 7_basekit_setup.sh
-│   ├── 8_motd_setup.sh
-│   ├── 9_cleanup.sh
-│   └── Readme.md
-```
+| File Name                  | Description                                      |
+|---------------------------|--------------------------------------------------|
+| [1_init_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/1_init_setup.sh)           | Initialize the server     |
+| [2_kernel_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/2_kernel_setup.sh)         | Install and setup the required kernel version    |
+| [3_gpu_drivers_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/3_gpu_drivers_setup.sh)    | Install  the Intel GPU drivers, runtimes      |
+| [4_hold-packages.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/4_hold-packages.sh)        | Prevent package updates from breaking compatibility |
+| [5_env_dev_utils_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/5_env_dev_utils_setup.sh)  | Install and setup the required tools and setup env|
+| [6_conda_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/6_conda_setup.sh)          | Install and configure the Conda package manager  |
+| [7_basekit_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/7_basekit_setup.sh)        | Install the required development toolkits        |
+| [8_motd_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/8_motd_setup.sh)           | Customize the server login message               |
+| [9_cleanup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/9_cleanup.sh)              | Clean up any unnecessary packages and files      |
+
 
 ### How to setup and configure?
 
