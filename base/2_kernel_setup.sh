@@ -21,11 +21,11 @@ colored_output() {
 # Update system
 colored_output "Updating system..." blue
 sudo apt-get update &&\
-	sudo apt-get upgrade -y
+    sudo apt-get upgrade -y
 
 # Install the kernel and headers
 KERNEL_VERSION="5.15.0-57"
-colored_output "Checking if kernel ${KERNEL_VERSION}-generic is installed, set as default, and running..." blue
+colored_output "Checking if kernel ${KERNEL_VERSION}-generic is installed..." blue
 
 if dpkg -l | grep -q "linux-image-${KERNEL_VERSION}-generic"; then
     colored_output "Kernel ${KERNEL_VERSION}-generic is already installed." yellow
@@ -36,12 +36,19 @@ fi
 
 colored_output "Setting kernel ${KERNEL_VERSION}-generic as the default kernel..." blue
 sudo sed -i "s/GRUB_DEFAULT=.*/GRUB_DEFAULT=\"1> $(echo $(($(awk -F\' '/menuentry / {print $2}' /boot/grub/grub.cfg \
-| grep -no '5.15.0-57' | sed 's/:/\n/g' | head -n 1)-2)))\"/" /etc/default/grub
-
+| grep -no '${KERNEL_VERSION}' | sed 's/:/\n/g' | head -n 1)-2)))\"/" /etc/default/grub
 sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT=\"$(echo $(awk -F'="' '$1  == "GRUB_CMDLINE_LINUX_DEFAULT" {print $2}'  \
 /etc/default/grub | tr -d '"') | sed 's/pci=realloc=off//g') pci=realloc=off\"/" /etc/default/grub
 
 sudo  update-grub
+
+# Check if the correct kernel is set as default
+if grep -q "${KERNEL_VERSION}-generic" /boot/grub/grub.cfg; then
+    colored_output "Kernel ${KERNEL_VERSION}-generic is set as the default kernel." green
+else
+    colored_output "ERROR: Failed to set kernel ${KERNEL_VERSION}-generic as the default kernel." red
+    exit 1
+fi
 
 colored_output "Rebooting in 10 seconds to apply the new kernel..." blue
 sleep 10
