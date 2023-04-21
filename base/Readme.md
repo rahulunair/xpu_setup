@@ -1,50 +1,36 @@
-### Setup Intel dGPUs with oneAPI components
+### Set Up Intel dGPUs with Intel oneAPI Components
 
-Step-by-Step Setup Instructions to setup the base envinronment for Intel dGPUs with oneAPI components
+⚠️ **Warning**: Follow these steps **in order** to set up your Intel GPU dGPU server.
 
-#### Setup process
-
-⚠️Warning: **Follow these steps in the order presented to set up your Intel GPU Max dGPU server** ⚠️Warning.
-
-1.  Initialize the Environment
-
-Update and upgrade the operating system, and install essential tools required for further setup:
+1. Initialize the Environment
 
 ```bash
 sudo ./1_init_setup.sh
 ```
 
+Updates and upgrades the operating system, and installs essential tools required for further setup.
+
 2.  Set Up the Kernel
-
-**Warning:** The system will reboot after this stage to ensure that the required kernel is in use. If not, the setup will fail.
-
-Set up the kernel based on the Intel GPU documentation. This guide assumes you are setting up an Intel GPU Max series GPU.
 
 ```bash
 sudo ./2_kernel_setup.sh
 ```
-
-This script will set up the recommended kernel, make it the default kernel, and reboot the machine.
+Sets up the recommended kernel, makes it the default, and **reboots** the machine.
 
 3.  Set Up GPU Drivers
-
-**Warning:** The system will reboot after this stage to ensure that the gpu drivers is setup correctly.
-
-Set up kernel mode and user mode drivers from Intel GPU repositories:
 
 ```bash
 sudo ./3_gpu_drivers_setup.sh
 ```
-
-This script will install the required kernel modules for the kernel to recognize the GPU, as well as runtime and developer drivers.
+Installs required kernel modules, runtime, and developer drivers. **Reboots** after this stage.
 
 4.  Hold kernel and kernel modules
 
-Let's mark and hold the kernel and kernel modules, so that these packages are not updates without the user directly choosing to do so.
 
 ```bash
 sudo ./4_hold-packages.sh
 ```
+Limits updates to the kernel and kernel modules.
 
 5.  Set Up the Environment and Developer Utilities
 
@@ -52,7 +38,7 @@ sudo ./4_hold-packages.sh
 sudo ./5_env_dev_utils_setup.sh
 ```
 
-This script will create a user named **'devcloud'**, install Docker, set up CPU scaling governors for performance, and add the **'devcloud'** user to the **'render'** and **'docker'** groups. It will also install essential developer utilities.
+Creates 'devcloud' user, installs Docker, sets up CPU scaling governors, and adds 'devcloud' to 'render' and 'docker' groups. Installs essential developer utilities.
 
 6.  Set Up Miniconda and Install Required Packages
 
@@ -60,7 +46,7 @@ This script will create a user named **'devcloud'**, install Docker, set up CPU 
 sudo ./6_conda_setup.sh
 ```
 
-This script will install Miniconda to the **'devcloud'** environment and install packages like JupyterHub and IPython to the base environment.
+Installs Miniconda to the 'devcloud' environment and packages like JupyterHub and IPython.
 
 7.  Install Packages from Intel Basekit
 
@@ -68,7 +54,7 @@ This script will install Miniconda to the **'devcloud'** environment and install
 sudo ./7_basekit_setup.sh
 ```
 
-This script will add Intel Basekit repositories and install core packages from the Intel Basekit.
+Adds Intel Basekit repositories and installs core packages.
 
 8.  Set Up the Message of the Day
 
@@ -76,18 +62,11 @@ This script will add Intel Basekit repositories and install core packages from t
 sudo ./8_motd_setup.sh
 ```
 
-This script will set up a message of the day for the devcloud user, displaying the available GPU and CPU, along with instructions on using oneAPI and how to get other oneAPI packages.
+Sets up a message of the day for the devcloud user, displaying available GPU and CPU, oneAPI usage instructions, and how to get other oneAPI packages.
 
 9.  Cleanup
-
-Finally, lets update and remove any packages that can be autoremoved
 
 ```bash
 sudo ./9_cleanup.sh
 ```
-
-After the setup is complete, you can verify if the GPU is setup correctly using the tool [xpu\_verify](https://github.com/rahulunair/xpu_verify). Also, you can use clinfo, hwinfo to check if the dGPU is enumerated.
-
-#### Conculsion
-
-The provided documentation covers each step in detail, ensuring a smooth setup process. If you encounter any issues during the setup or have any questions, please do not hesitate to raise an issue on the GitHub repository. This will help us improve the documentation and address any potential problems promptly.
+Finally, updates and removes any packages that can be autoremoved.
