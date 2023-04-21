@@ -3,8 +3,8 @@
 export DEBIAN_FRONTEND=noninteractive
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
-KERNEL_NAME="linux-image-5.17.0-35-generic"
-KERNEL_VERSION="5.17.0-35"
+KERNEL_NAME="linux-image-5.15.0-57-generic"
+KERNEL_VERSION="5.15.0-57"
 
 alias sudo="sudo -E"
 colored_output() {
