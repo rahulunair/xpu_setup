@@ -1,4 +1,4 @@
-## Intel GPU Max dGPU Server Setup Guide
+## unOfficial Intel discrete GPU Server Setup Guide
 
 This guide provides step-by-step instructions for setting up an Intel discrete GPUs on Ubuntu 22.04. This repository contains a series of scripts that automate the configuration process, making it easier and more efficient. Depending on your specific dGPU, you can use one of the following branches:
 
