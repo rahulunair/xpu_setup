@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GHUB_BOT }}
 
     - name: Set up Python
       uses: actions/setup-python@v2
