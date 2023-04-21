@@ -49,4 +49,5 @@ Change directory to base inside xpu\_setup and follow the Readme.md inside 'base
 ```bash
 cd xpu_verify/base
 ```
-* I have tried to be as faithful as i can to the [official guide](https://dgpu-docs.intel.com/installation-guides/index.html), but added some additional bits to make life easier.
+
+\* I have tried to be as faithful as I can to the [official guide](https://dgpu-docs.intel.com/installation-guides/index.html), but added some additional bits to make life easier.
