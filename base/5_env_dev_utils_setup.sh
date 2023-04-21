@@ -6,6 +6,8 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 
 USERNAME="devcloud"
+XPU_SMI_URL=$(curl -sL "https://github.com/intel/xpumanager/releases" | grep -oP "href=\"\K[^\"']*(xpu-smi_.*_u22\.04_amd64\.deb\")" | sed 's/"$//; s/^/https:\/\/github.com/')
+XPU_DEB_NAME=$(basename "$XPU_SMI_URL")
 
 colored_output() {
     local text="$1"
@@ -75,13 +77,13 @@ colored_output "Adding ${USERNAME} to docker and render groups..." blue
 sudo usermod -aG docker,render ${USERNAME}
 
 # install xpu-smi
-wget https://github.com/intel/xpumanager/releases/download/V1.2.7/xpu-smi_1.2.7_20230406.084158.3d989a61_u22.04_amd64.deb
-sudo apt install -y ./xpu-smi_1.2.7_20230406.084158.3d989a61_u22.04_amd64.deb
-sudo rm -rf ./xpu-smi_1.2.7_20230406.084158.3d989a61_u22.04_amd64.deb
+wget "$XPU_SMI_URL"
+sudo apt install -y ./"$XPU_DEB_NAME"
+sudo rm -rf ./"$XPU_DEB_NAME"
 
 # inform user
 colored_output "Cleanup..." blue
-sudo apt autoremove
+sudo apt -y autoremove
 colored_output "Setup completed. Rebooting in 10 seconds..." blue
 sleep 10
 sudo reboot
