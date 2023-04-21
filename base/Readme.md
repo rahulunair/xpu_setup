@@ -2,8 +2,6 @@
 
 Step-by-Step Setup Instructions to setup the base envinronment for Intel dGPUs with oneAPI components
 
-#### Setup process
-
 ⚠️ **Warning**: Follow these steps **in the order** presented to set up your Intel GPU Max dGPU server.
 
 1.  Initialize the Environment
