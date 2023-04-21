@@ -4,12 +4,12 @@
 
 1.  Initialize the Environment
 
-Update and upgrade the operating system, and install essential tools required for further setup:
+Update and upgrade the operating system, and install essential tools required for further setup.
 ```bash
 sudo ./1_init_setup.sh
 ```
 2.  Set Up the Kernel
-
+**Warning:** The system will reboot after this stage to ensure that the required kernel is setup.
 Set up the kernel based on the Intel GPU documentation. This guide assumes you are setting up an Intel GPU Max series GPU.
 ```bash
 sudo ./2_kernel_setup.sh
@@ -20,7 +20,6 @@ This script will set up the recommended kernel, make it the default kernel, and 
 3.  Set Up GPU Drivers
 
 **Warning:** The system will reboot after this stage to ensure that the gpu drivers is setup correctly.
-
 Set up kernel mode and user mode drivers from Intel GPU repositories:
 
 ```bash
