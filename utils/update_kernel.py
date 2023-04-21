@@ -11,7 +11,7 @@ args = parser.parse_args()
 
 if args.arc:
     KERNEL_URL = "https://dgpu-docs.intel.com/_sources/installation-guides/ubuntu/ubuntu-jammy-arc.md.txt"
-    DEFAULT_KERNEL_NAME = "linux-image-5.19.0-35-generic"
+    DEFAULT_KERNEL_NAME = "linux-image-5.17.0-35-generic"
 else:
     KERNEL_URL = "https://dgpu-docs.intel.com/_sources/installation-guides/ubuntu/ubuntu-jammy-max.md.txt"
     DEFAULT_KERNEL_NAME = "linux-image-5.15.0-57-generic"
