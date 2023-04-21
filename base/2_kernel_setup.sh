@@ -3,6 +3,8 @@
 export DEBIAN_FRONTEND=noninteractive
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
+KERNEL_NAME="linux-image-5.19.0-35-generic"
+KERNEL_VERSION="5.17.0-35"
 
 alias sudo="sudo -E"
 colored_output() {
@@ -20,9 +22,8 @@ colored_output() {
 colored_output "Updating and upgrading os..." blue
 sudo apt-get update &&\
     sudo apt-get upgrade -y
+
 # Install the kernel and headers, try to get the latest from the docs (moved to github action), if not use default
-KERNEL_NAME="linux-image-5.15.0-57-generic"
-KERNEL_VERSION="5.15.0-57"
 colored_output "Checking if kernel ${KERNEL_NAME} is installed..." blue
 if dpkg -l | grep -q "${KERNEL_NAME}"; then
     colored_output "Kernel ${KERNEL_NAME} is already installed." yellow

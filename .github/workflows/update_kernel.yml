@@ -6,13 +6,12 @@ on:
 jobs:
   update_kernel_info:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
         token: ${{ secrets.GHUB_BOT }}
-
+        fetch-depth: 0
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -23,12 +22,17 @@ jobs:
         pip install beautifulsoup4 requests
     - name: Update kernel information in script
       run: |
-        python utils/update_kernel.py
-    - name: Commit and push changes
-      run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "rahulunair@gmail.com"
-        git add base/2_kernel_setup.sh
-        git diff-index --quiet HEAD || git commit -m "Update kernel information"
-        git push
+        for branch in main arc; do
+          git checkout $branch
+          if [[ $branch == "arc" ]]; then
+            python utils/update_kernel.py --arc
+          else
+            python utils/update_kernel.py
+          fi
+          git config user.name "GitHub Actions Bot"
+          git config user.email "rahulunair@gmail.com"
+          git add base/2_kernel_setup.sh
+          git diff-index --quiet HEAD || git commit -m "Update kernel information"
+          git push origin $branch
+        done
 
