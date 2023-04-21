@@ -8,7 +8,7 @@ This guide provides step-by-step instructions for setting up an Intel discrete G
 
 ### Prerequisites
 
-Make sure to setup the base operating system on your machine using a variant of Ubuntu 22.04 (Jammy). For servers, download the Ubuntu cloud image for Jammy (22.04) from the following [link](https://cloud-images.ubuntu.com/jammy/current/). Additionally, ensure that your machine is connected to the internet before proceeding.
+Make sure to setup the base operating system on your machine using a variant of Ubuntu 22.04 (Jammy). For servers, download the [Ubuntu cloud image](https://cloud-images.ubuntu.com/jammy/current/) for Jammy (22.04). Additionally, ensure that your machine is connected to the internet before proceeding.
 
 ### xpu\_setup Repository Structure
 
