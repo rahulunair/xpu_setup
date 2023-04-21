@@ -50,7 +50,7 @@ Change directory to base inside xpu\_setup and follow the Readme.md inside 'base
 cd xpu_verify/base
 ```
 
-After the setup is complete, you can verify if the GPU is setup correctly using the tool [xpu\_verify](https://github.com/rahulunair/xpu_verify). Also, you can use clinfo, hwinfo to check if the dGPU is enumerated.
+After the setup is complete, you can verify if the GPU is setup correctly using the tool [xpu\_verify](https://github.com/rahulunair/xpu_verify).Additionally, you can use clinfo and hwinfo to confirm that the GPU can be successfully enumerated.
 
 #### Conculsion
 
