@@ -1,9 +1,8 @@
-name: Check kernel change from docs daily and if found update Kernel Name and version 
+name: Check kernel version
 on:
   schedule:
-    - cron: '0 0 * * *' # Run daily at midnight
-
-  workflow_dispatch: # Allow manual triggering
+    - cron: '30 5 * * 1,2,3,4'
+  workflow_dispatch:
 jobs:
   update_kernel_info:
     runs-on: ubuntu-latest
