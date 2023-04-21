@@ -50,4 +50,10 @@ Change directory to base inside xpu\_setup and follow the Readme.md inside 'base
 cd xpu_verify/base
 ```
 
+After the setup is complete, you can verify if the GPU is setup correctly using the tool [xpu\_verify](https://github.com/rahulunair/xpu_verify). Also, you can use clinfo, hwinfo to check if the dGPU is enumerated.
+
+#### Conculsion
+
+The provided documentation covers each step in detail, ensuring a smooth setup process. If you encounter any issues during the setup or have any questions, please do not hesitate to raise an issue on the GitHub repository. This will help us improve the documentation and address any potential problems promptly.
+
 \* I have tried to be as faithful as I can to the [official guide](https://dgpu-docs.intel.com/installation-guides/index.html), but added some additional bits to make life easier.
