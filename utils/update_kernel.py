@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+import sys
 from bs4 import BeautifulSoup
 
 KERNEL_URL = "https://dgpu-docs.intel.com/_sources/installation-guides/ubuntu/ubuntu-jammy-max.md.txt"
@@ -12,6 +13,9 @@ try:
     soup = BeautifulSoup(response.text, 'html.parser')
     kernel_name = re.search(r"install-suggests linux-image-.*-generic", str(soup))
     kernel_name = kernel_name.group(0).split()[1] if kernel_name else DEFAULT_KERNEL_NAME
+    if kernel_name == DEFAULT_KERNEL_NAME:
+        print(f"kernel in docs is the latest kernel :{kernel_name}, no need to update...")
+        sys.exit(0)
     kernel_version = '-'.join(kernel_name.split('-')[2:4])
     script_path = os.path.join('base', '2_kernel_setup.sh')
     with open(script_path, 'r') as file:
@@ -32,4 +36,3 @@ try:
             file.write(updated_script_content)
 except Exception as e:
     print(f"couldn't fetch kernel info from the docs, please check the docs and update the script: {e}")
-
