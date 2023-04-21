@@ -2,7 +2,7 @@
 
 This guide provides step-by-step instructions for setting up an Intel discrete GPUs on Ubuntu 22.04. This repository contains a series of scripts that automate the configuration process, making it easier and more efficient. Depending on your specific dGPU, you can use one of the following branches:
 
-    - For Intel Data Center GPU Max Series (PVC) setup, use the main branch.
+    - For Intel Data Center GPU Max Series (PVC) setup, use the main branch (default).
     - For Intel Arc (Alchemist) GPUs setup, use the arc branch.
     - For Intel Data Center GPU Flex Series (ATS) setup, use the flex branch.
 
@@ -43,7 +43,6 @@ Switch branch to 'arc' or 'flex' if you are setting up either Intel Arc GPUs or 
 ```bash
 git checkout arc # for Intel Arc GPUs
 ```
-
 Change directory to base inside xpu\_setup and follow the Readme.md inside 'base':
 
 ```bash
