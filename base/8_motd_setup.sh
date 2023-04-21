@@ -47,10 +47,6 @@ echo -e '       "$IMAGE_NAME:$IMAGE_TAG"'
 echo ""
 echo -e "Once inside the Docker container, you can run your desired AI workloads."
 echo ""
-echo -e "\033[1;34mTo transfer files to the server, use the scp or rsync command:\033[0m"
-echo -e "scp <local-file-path> <username>@<server-address>:<remote-file-path>"
-echo -e "rsync -avz <local-file-path> <username>@<server-address>:<remote-file-path>"
-echo ""
 echo -e "\033[1;34mSystem Information:\033[0m"
 echo -e "Hostname: $(hostname)"
 echo -e "CPU: $(lscpu | awk '/Model name/ { $1=""; sub(/^ +/, ""); print }' | sed 's/^[[:space:]]*//')" | sed 's/name://g'                                                     
