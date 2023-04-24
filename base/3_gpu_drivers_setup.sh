@@ -68,7 +68,8 @@ sudo apt-get install -y \
   intel-igc-cm \
   libigdfcl-dev \
   libigfxcmrt-dev \
-  level-zero-dev
+  level-zero-dev \
+  libdrm-dev
 
 # Reboot
 colored_output "Rebooting the system in 10 seconds..." blue
