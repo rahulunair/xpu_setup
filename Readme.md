@@ -69,7 +69,7 @@ After the setup is complete, you can verify if the GPU is setup correctly using 
 
 If HPC Kit or Render Kit are requested for the image see the individual Readme.md in each folder under optional_components.
 
-### Conculsion
+### Conclusion
 
 The provided documentation covers each step in detail, ensuring a smooth setup process. If you encounter any issues during the setup or have any questions, please do not hesitate to raise an issue on the GitHub repository. This will help us improve the documentation and address any potential problems promptly.
 
