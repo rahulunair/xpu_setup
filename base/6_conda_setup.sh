@@ -23,16 +23,11 @@ install_miniconda() {
     chmod +x Miniconda3-latest-Linux-x86_64.sh
     sudo ./Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda
     sudo rm -rf ./Miniconda3-latest-Linux-x86_64.sh
-    
-    # Set proper permissions for /opt/miniconda
     sudo chown -R root:users /opt/miniconda
     sudo chmod -R 775 /opt/miniconda
-    
-    # Add Conda environment variables for all users
     echo 'export PATH="/opt/miniconda/bin:$PATH"' | sudo tee /etc/profile.d/conda.sh
     echo '. /opt/miniconda/etc/profile.d/conda.sh' | sudo tee -a /etc/profile.d/conda.sh
     echo 'conda activate base' | sudo tee -a /etc/profile.d/conda.sh
-    # Set correct permissions for /etc/profile.d/conda.sh
     sudo chmod 644 /etc/profile.d/conda.sh
 }
 
