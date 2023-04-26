@@ -63,6 +63,7 @@ sudo apt-get install -y \
     cpufrequtils \
     hwinfo \
     vainfo \
+    net-tools \
     clinfo
 
 # install and setup Docker
