@@ -6,8 +6,11 @@ This guide provides step-by-step instructions for setting up an Intel discrete G
     - For Intel Arc (Alchemist) GPUs setup, use the 'arc' branch.
     - For Intel Data Center GPU Flex Series (ATS) setup, use the 'flex' branch.
     
-    Select one from(default is for GPU Max):
-    ![image](https://user-images.githubusercontent.com/786476/234941539-fa4d3a30-5e5d-4888-990e-8cf13766abe5.png)
+Select one from(default is for GPU Max):
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/786476/234941539-fa4d3a30-5e5d-4888-990e-8cf13766abe5.png" width="300" alt="Branches Screenshot">
+</p>
+
 
 
 ### Prerequisites
