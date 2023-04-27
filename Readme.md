@@ -1,6 +1,6 @@
 ## Unofficial Setup Guide for Intel discrete GPU on Linux*
 
-This guide provides step-by-step instructions for setting up an Intel discrete GPUs on Ubuntu 22.04. This repository contains a series of scripts that automate the configuration process, making it easier and more efficient. Depending on your specific dGPU, you can use one of the following branches:
+This guide provides step-by-step instructions for setting up an Intel discrete GPUs on Ubuntu 22.04. The repository contains a series of scripts that automate the configuration process, making it easier and more efficient. Depending on your specific dGPU, you can use one of the following branches:
 
     - For Intel Data Center GPU Max Series (PVC) setup, use the main branch (default).
     - For Intel Arc (Alchemist) GPUs setup, use the arc branch.
