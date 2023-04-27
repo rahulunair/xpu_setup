@@ -2,6 +2,11 @@
 
 ⚠️ **Warning**: Follow these steps **in order** to set up your Intel GPU dGPU server.
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/786476/234942454-75b33ceb-2435-4760-8f5a-af5d311d549d.png" width="500" alt="Branches Screenshot">
+</p>
+
+
 1. Initialize the Environment
 
 ```bash
