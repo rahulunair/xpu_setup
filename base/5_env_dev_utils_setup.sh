@@ -74,7 +74,8 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # add devcloud user to docker and render groups
 colored_output "Adding ${USERNAME} to docker and render groups..." blue
-sudo usermod -aG docker,render ${USERNAME}
+sudo usermod -aG docker
+sudo usermod -aG render ${USERNAME}
 
 # install xpu-smi
 wget "$XPU_SMI_URL"
