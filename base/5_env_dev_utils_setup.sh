@@ -6,7 +6,14 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 
 USERNAME="devcloud"
-XPU_SMI_URL=$(curl -sL "https://github.com/intel/xpumanager/releases" | grep -oP "href=\"\K[^\"']*(xpu-smi_.*_u22\.04_amd64\.deb\")" | sed 's/"$//; s/^/https:\/\/github.com/')
+
+# get the latest xpu-smi
+XPU_SMI_URL=$(curl -sL "https://github.com/intel/xpumanager/releases" | awk '/href="[^"]*xpu-smi[^"]*u22\.04_amd64\.deb"/{gsub(/(^.*href=")|(".*$)/,""); print "https://github.com" $0; exit}')
+DEFAULT_XPU_URL="https://github.com/intel/xpumanager/releases/download/V1.2.9/xpu-smi_1.2.9_20230504.015521.321a3152.u22.04_amd64.deb"
+if [ -z "$XPU_SMI_URL" ]; then
+   echo "failed to retrieve latest xpu-smi, using the default version"
+  XPU_SMI_URL="$DEFAULT_XPU_URL"
+fi
 XPU_DEB_NAME=$(basename "$XPU_SMI_URL")
 
 colored_output() {
