@@ -8,13 +8,13 @@ alias sudo="sudo -E"
 USERNAME="devcloud"
 
 # get the latest xpu-smi
-XPU_SMI_URL=$(curl -sL "https://github.com/intel/xpumanager/releases" | awk '/href="[^"]*xpu-smi[^"]*u22\.04_amd64\.deb"/{gsub(/(^.*href=")|(".*$)/,""); print "https://github.com" $0; exit}')
-DEFAULT_XPU_URL="https://github.com/intel/xpumanager/releases/download/V1.2.9/xpu-smi_1.2.9_20230504.015521.321a3152.u22.04_amd64.deb"
-if [ -z "$XPU_SMI_URL" ]; then
-   echo "failed to retrieve latest xpu-smi, using the default version"
-  XPU_SMI_URL="$DEFAULT_XPU_URL"
-fi
-XPU_DEB_NAME=$(basename "$XPU_SMI_URL")
+#XPU_SMI_URL=$(curl -sL "https://github.com/intel/xpumanager/releases" | awk '/href="[^"]*xpu-smi[^"]*u22\.04_amd64\.deb"/{gsub(/(^.*href=")|(".*$)/,""); print "https://github.com" $0; exit}')
+#DEFAULT_XPU_URL="https://github.com/intel/xpumanager/releases/download/V1.2.9/xpu-smi_1.2.9_20230504.015521.321a3152.u22.04_amd64.deb"
+#if [ -z "$XPU_SMI_URL" ]; then
+#   echo "failed to retrieve latest xpu-smi, using the default version"
+#  XPU_SMI_URL="$DEFAULT_XPU_URL"
+#fi
+#XPU_DEB_NAME=$(basename "$XPU_SMI_URL")
 
 colored_output() {
     local text="$1"
@@ -85,9 +85,12 @@ sudo usermod -aG docker ${USERNAME}
 sudo usermod -aG render ${USERNAME}
 
 # install xpu-smi
+# https://dgpu-docs.intel.com/driver/installation.html#ubuntu-server
+# xpu-smi now available from intel graphics repo
 wget "$XPU_SMI_URL"
-sudo apt install -y ./"$XPU_DEB_NAME"
-sudo rm -rf ./"$XPU_DEB_NAME"
+sudo apt-get install -y xpu-smi
+#sudo apt install -y ./"$XPU_DEB_NAME"
+#sudo rm -rf ./"$XPU_DEB_NAME"
 
 # inform user
 colored_output "Cleanup..." blue
