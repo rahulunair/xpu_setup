@@ -32,13 +32,17 @@ else
     sudo apt-get install -y --install-suggests "${KERNEL_NAME}"
 fi
 
+
 colored_output "Setting kernel ${KERNEL_VERSION}-generic as the default kernel..." blue
 entry=$(echo $(awk -F\' '/menuentry / {print $2}' /boot/grub/grub.cfg | grep "${KERNEL_VERSION}" | head -n 1))
 sudo sed -i "s/GRUB_DEFAULT=.*/GRUB_DEFAULT=\"Advanced options for Ubuntu>${entry}\"/g" /etc/default/grub
-sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT=\"$(echo $(awk -F'="' '$1  == "GRUB_CMDLINE_LINUX_DEFAULT" {print $2}'  \
-/etc/default/grub | tr -d '"') | sed 's/pci=realloc=off//g') pci=realloc=off\"/" /etc/default/grub
+# adding hangcheck and relloc=off for multicard setup
+GRUB_CMDLINE_LINUX_DEFAULT_VALUE="$(echo $(awk -F'="' '$1  == "GRUB_CMDLINE_LINUX_DEFAULT" {print $2}'  /etc/default/grub | tr -d '"') | sed 's/pci=realloc=off//g') pci=realloc=off i915=enable_hangcheck=N"
+sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT=\"${GRUB_CMDLINE_LINUX_DEFAULT_VALUE}\"/" /etc/default/grub
 
 sudo  update-grub
+
+
 # Check if the correct kernel is set as default
 if grep -q "${KERNEL_VERSION}-generic" /boot/grub/grub.cfg; then
     colored_output "Kernel ${KERNEL_VERSION}-generic is set as the default kernel." green
