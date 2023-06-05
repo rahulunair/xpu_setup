@@ -30,7 +30,7 @@ The essential components for setting up a GPU device in the repo has the followi
 │   ├── [02_kernel_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/2_kernel_setup.sh)         | Install and setup the required kernel version    |
 │   ├── [03_gpu_drivers_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/3_gpu_drivers_setup.sh)    | Install  the Intel GPU drivers, runtimes      |
 │   ├── [04_hold-packages.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/4_hold-packages.sh)        | Prevent package updates from breaking compatibility |
-│   ├── [05_env_dev_utils_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/5_env_dev_utils_setup.sh)  | Install and setup the required tools and setup env|
+│   ├── [05_env_dev_utils_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/5_env_dev_utils_setup.sh)  | Setup the reqd tools & env (use '--no-docker' flag to not install docker)|
 │   ├── [06_conda_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/6_conda_setup.sh)          | Install and configure the Conda package manager  |
 │   ├── [07_basekit_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/7_basekit_setup.sh)        | Install the required development toolkits        |
 │   ├── [08_motd_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/8_motd_setup.sh)           | Customize the server login message               |
