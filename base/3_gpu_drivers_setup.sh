@@ -49,10 +49,11 @@ sudo apt-get -y install \
 
 # Install DKMS kernel modules
 # https://dgpu-docs.intel.com/driver/installation.html#ubuntu-server
+# package names for dkms drivers changed, updated with latest one
 colored_output "Installing DKMS kernel modules..." blue
 #sudo apt-get install -y intel-platform-vsec-dkms intel-platform-cse-dkms
 #sudo apt-get install -y intel-i915-dkms intel-fw-gpu
-sudo apt-get install -y intel-i915-dkms xpu-smi
+sudo apt-get install -y intel-i915-dkms
 
 # Install run-time packages
 colored_output "Installing run-time packages..." blue
