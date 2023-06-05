@@ -48,9 +48,11 @@ sudo apt-get -y install \
     libc6-dev
 
 # Install DKMS kernel modules
+# https://dgpu-docs.intel.com/driver/installation.html#ubuntu-server
 colored_output "Installing DKMS kernel modules..." blue
-sudo apt-get install -y intel-platform-vsec-dkms intel-platform-cse-dkms
-sudo apt-get install -y intel-i915-dkms intel-fw-gpu
+#sudo apt-get install -y intel-platform-vsec-dkms intel-platform-cse-dkms
+#sudo apt-get install -y intel-i915-dkms intel-fw-gpu
+sudo apt-get install -y intel-i915-dkms xpu-smi
 
 # Install run-time packages
 colored_output "Installing run-time packages..." blue
