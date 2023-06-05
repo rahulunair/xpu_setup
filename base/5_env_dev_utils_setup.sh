@@ -6,15 +6,16 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 
 USERNAME="devcloud"
+INSTALL_DOCKER=true
 
-# get the latest xpu-smi
-#XPU_SMI_URL=$(curl -sL "https://github.com/intel/xpumanager/releases" | awk '/href="[^"]*xpu-smi[^"]*u22\.04_amd64\.deb"/{gsub(/(^.*href=")|(".*$)/,""); print "https://github.com" $0; exit}')
-#DEFAULT_XPU_URL="https://github.com/intel/xpumanager/releases/download/V1.2.9/xpu-smi_1.2.9_20230504.015521.321a3152.u22.04_amd64.deb"
-#if [ -z "$XPU_SMI_URL" ]; then
-#   echo "failed to retrieve latest xpu-smi, using the default version"
-#  XPU_SMI_URL="$DEFAULT_XPU_URL"
-#fi
-#XPU_DEB_NAME=$(basename "$XPU_SMI_URL")
+for arg in "$@"
+do
+    case $arg in
+        --no-docker)
+        INSTALL_DOCKER=false
+        ;;
+    esac
+done
 
 colored_output() {
     local text="$1"
@@ -37,6 +38,8 @@ else
     sudo adduser --gecos "" ${USERNAME}
     sudo usermod -aG sudo ${USERNAME}
 fi
+# add user to render group
+sudo usermod -aG render ${USERNAME}
 
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
@@ -70,27 +73,34 @@ sudo apt-get install -y \
     cpufrequtils \
     hwinfo \
     vainfo \
-    clinfo
+    clinfo \
+    autoconf \
+    automake \
+    libcurl4-openssl-dev
 
 # install and setup Docker
-colored_output "Adding Docker repository and installing Docker..." blue
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor | sudo sh -c "cat > /usr/share/keyrings/docker-archive-keyring.gpg"
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+if $INSTALL_DOCKER; then
+    # install and setup Docker
+    colored_output "Adding Docker repository and installing Docker..." blue
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor | sudo sh -c "cat > /usr/share/keyrings/docker-archive-keyring.gpg"
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# add devcloud user to docker and render groups
-colored_output "Adding ${USERNAME} to docker and render groups..." blue
-sudo usermod -aG docker ${USERNAME}
-sudo usermod -aG render ${USERNAME}
+    # add devcloud user to docker group
+    colored_output "Adding ${USERNAME} to docker group..." blue
+    sudo usermod -aG docker ${USERNAME}
+fi
 
 # install xpu-smi
 # https://dgpu-docs.intel.com/driver/installation.html#ubuntu-server
-# xpu-smi now available from intel graphics repo
-wget "$XPU_SMI_URL"
 sudo apt-get install -y xpu-smi
-#sudo apt install -y ./"$XPU_DEB_NAME"
-#sudo rm -rf ./"$XPU_DEB_NAME"
+
+# ulimit tweaks
+colored_output "Setting ulimit values..." blue
+echo "ulimit -n 65535" | sudo tee -a /etc/security/limits.conf
+echo "ulimit -u 65535" | sudo tee -a /etc/security/limits.conf
+
 
 # inform user
 colored_output "Cleanup..." blue
