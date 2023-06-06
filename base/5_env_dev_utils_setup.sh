@@ -75,6 +75,9 @@ sudo apt-get install -y \
     vainfo \
     clinfo \
     autoconf \
+    libncurses5-dev \
+    libncursesw5-dev \
+    ncurses-devel \
     automake \
     libcurl4-openssl-dev
 
