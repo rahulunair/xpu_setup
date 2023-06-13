@@ -3,8 +3,8 @@
 export DEBIAN_FRONTEND=noninteractive
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
-KERNEL_NAME="linux-image-5.15.0-57-generic"
-KERNEL_VERSION="5.15.0-57"
+KERNEL_NAME="linux-image-5.15.0-73-generic"
+KERNEL_VERSION="5.15.0-73"
 
 alias sudo="sudo -E"
 colored_output() {
@@ -50,6 +50,10 @@ else
     colored_output "ERROR: Failed to set kernel ${KERNEL_VERSION}-generic as the default kernel." red
     exit 1
 fi
-colored_output "Rebooting in 10 seconds to apply the new kernel..." blue
-sleep 10
-sudo reboot
+
+if [ -z "$OMMIT_REBOOT" ]
+then
+    colored_output "Rebooting in 10 seconds to apply the new kernel..." blue
+    sleep 10
+    sudo reboot
+fi

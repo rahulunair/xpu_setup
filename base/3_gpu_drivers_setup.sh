@@ -5,7 +5,7 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 set -e
 
-KERNEL_VERSION="5.15.0-57"
+KERNEL_VERSION="5.15.0-73"
 REPO_URL="https://repositories.intel.com/graphics"
 REPO_KEY_URL="${REPO_URL}/intel-graphics.key"
 REPO_LIST_FILE="/etc/apt/sources.list.d/intel.gpu.jammy.list"
@@ -75,6 +75,9 @@ sudo apt-get install -y \
   libdrm-dev
 
 # Reboot
-colored_output "Rebooting the system in 10 seconds..." blue
-sleep 10
-sudo reboot
+if [ -z "$OMMIT_REBOOT" ]
+then
+    colored_output "Rebooting the system in 10 seconds..." blue
+    sleep 10
+    sudo reboot
+fi

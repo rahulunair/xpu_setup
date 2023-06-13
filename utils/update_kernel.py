@@ -14,7 +14,7 @@ if args.arc:
     DEFAULT_KERNEL_NAME = "linux-image-5.17.0-35-generic"
 else:
     KERNEL_URL = "https://dgpu-docs.intel.com/_sources/installation-guides/ubuntu/ubuntu-jammy-max.md.txt"
-    DEFAULT_KERNEL_NAME = "linux-image-5.15.0-57-generic"
+    DEFAULT_KERNEL_NAME = "linux-image-5.15.0-73-generic"
 
 def update_kernel_version(KERNEL_URL, DEFAULT_KERNEL_NAME):
     try:
