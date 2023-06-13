@@ -12,7 +12,7 @@ colored_output() {
     esac
 }
 
-KERNEL_VERSION="5.15.0-57"
+KERNEL_VERSION="5.15.0-73"
 KERNEL_PACKAGE="linux-image-${KERNEL_VERSION}-generic"
 KERNEL_HEADER_PACKAGE="linux-headers-${KERNEL_VERSION}-generic"
 INTEL_PACKAGES=("intel-i915-dkms" "intel-fw-gpu" "intel-platform-vsec-dkms" "intel-platform-cse-dkms")
