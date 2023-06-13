@@ -5,7 +5,7 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 set -e
 
-KERNEL_VERSION="5.15.0-57"
+KERNEL_VERSION="5.15.0-73"
 REPO_URL="https://repositories.intel.com/graphics"
 REPO_KEY_URL="${REPO_URL}/intel-graphics.key"
 REPO_LIST_FILE="/etc/apt/sources.list.d/intel.gpu.jammy.list"
