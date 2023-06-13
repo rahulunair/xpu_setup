@@ -35,7 +35,7 @@ colored_output "Adding package repository..." blue
 sudo apt-get install -y gpg-agent wget
 wget -qO - "${REPO_KEY_URL}" | \
   sudo gpg --dearmor | sudo sh -c "cat > /usr/share/keyrings/intel-graphics.gpg"
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] ${REPO_URL}/ubuntu jammy flex" | \
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] ${REPO_URL}/ubuntu jammy mahttps://github.com/rahulunair/xpu_setup/blob/main/base/3_gpu_drivers_setup.shhttps://github.com/rahulunair/xpu_setup/blob/main/base/3_gpu_drivers_setup.shx" | \
   sudo tee "${REPO_LIST_FILE}"
 
 # Install dependencies
