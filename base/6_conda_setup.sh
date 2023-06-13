@@ -27,7 +27,7 @@ install_miniconda() {
     sudo chmod -R 775 /opt/miniconda
     echo 'export PATH="/opt/miniconda/bin:$PATH"' | sudo tee /etc/profile.d/conda.sh
     echo '. /opt/miniconda/etc/profile.d/conda.sh' | sudo tee -a /etc/profile.d/conda.sh
-    echo 'conda activate base' | sudo tee -a /etc/profile.d/conda.sh
+    #echo 'conda activate base' | sudo tee -a /etc/profile.d/conda.sh  # prevent activation by default, commenting it out
     sudo chmod 644 /etc/profile.d/conda.sh
 }
 
