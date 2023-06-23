@@ -46,6 +46,10 @@ else
     colored_output "ERROR: Failed to set kernel ${KERNEL_VERSION}-generic as the default kernel." red
     exit 1
 fi
-colored_output "Rebooting in 10 seconds to apply the new kernel..." blue
-sleep 10
-sudo reboot
+
+if [ -z "$OMMIT_REBOOT" ]
+then
+    colored_output "Rebooting in 10 seconds to apply the new kernel..." blue
+    sleep 10
+    sudo reboot
+fi
