@@ -49,7 +49,7 @@ EOF
 
 # enable and start the service
 sudo systemctl enable set-cpufreq-governor.service
-sudo systemctl start set-cpufreq-governor.service
+[ -z "$OMMIT_SERVICE_START" ] && sudo systemctl start set-cpufreq-governor.service
 
 # install required packages
 colored_output "Installing required packages..." blue
@@ -84,6 +84,10 @@ sudo rm -rf ./"$XPU_DEB_NAME"
 # inform user
 colored_output "Cleanup..." blue
 sudo apt -y autoremove
-colored_output "Setup completed. Rebooting in 10 seconds..." blue
-sleep 10
-sudo reboot
+
+if [ -z "$OMMIT_REBOOT" ]
+then
+    colored_output "Setup completed. Rebooting in 10 seconds..." blue
+    sleep 10
+    sudo reboot
+fi
