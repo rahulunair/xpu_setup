@@ -4,7 +4,7 @@ This guide helps to set up and verify the Advanced Matrix Extensions (AMX) on an
 
 The procedure comprises two parts:
 
-1. **Kernel Update:** For the successful Virtual Machine (VM) passthrough for AMX, the system requires a kernel version equal to or greater than 5.19. We provide a script named `setup_host.sh` that installs this required kernel version on Ubuntu 22.04 operating systems.
+1. **Kernel Update:** For the successful Virtual Machine (VM) passthrough for AMX, the system requires a kernel version equal to or greater than 5.19. We provide a script named `setup_kernel.sh` that installs this required kernel version on Ubuntu 22.04 operating systems.
 
 2. **AMX Capabilities Verification:** Also included is a `check_amx.sh` shell script to confirm the correct setup and utilization of AMX extensions. This script installs PyTorch, executes a test program, and validates whether the system correctly identifies and uses the AMX extension. It also checks if AMX's bf16 kernels are properly employed by PyTorch.
 
