@@ -41,6 +41,26 @@ fi
 # add user to render group
 sudo usermod -aG render ${USERNAME}
 
+# install required packages
+colored_output "Installing required packages..." blue
+sudo apt-get update
+sudo apt-get install -y \
+    pkg-config \
+    build-essential \
+    cmake \
+    neovim \
+    vim \
+    cpufrequtils \
+    hwinfo \
+    vainfo \
+    clinfo \
+    autoconf \
+    libtinfo6 \
+    libncurses5 \
+    libncurses-dev \
+    automake \
+    libcurl4-openssl-dev
+
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
 
@@ -60,26 +80,6 @@ EOF
 # enable and start the service
 sudo systemctl enable set-cpufreq-governor.service
 sudo systemctl start set-cpufreq-governor.service
-
-# install required packages
-colored_output "Installing required packages..." blue
-sudo apt-get update
-sudo apt-get install -y \
-    pkg-config \
-    build-essential \
-    cmake \
-    neovim \
-    vim \
-    cpufrequtils \
-    hwinfo \
-    vainfo \
-    clinfo \
-    autoconf \
-    libncurses5-dev \
-    libncursesw5-dev \
-    ncurses-devel \
-    automake \
-    libcurl4-openssl-dev
 
 # install and setup Docker
 if $INSTALL_DOCKER; then
