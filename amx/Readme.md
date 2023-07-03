@@ -1,6 +1,6 @@
 ## Advanced Matrix Extensions (AMX) Setup Guide
 
-This guide helps to set up and verify the Advanced Matrix Extensions (AMX) on an Ubuntu 22.04 server. AMX provides a significant performance boost for Artificial Intelligence (AI) workloads, especially those involving matrix operations.
+This guide helps to set up and verify the Advanced Matrix Extensions (AMX) on an Ubuntu 22.04 server for Intel® Xeon® Scalable processor Max Series and 4th gen Intel® Xeon® Scalable processors. AMX provides a significant performance boost for Artificial Intelligence (AI) workloads, especially those involving matrix operations.
 
 The procedure comprises two parts:
 
