@@ -40,7 +40,8 @@ install_packages() {
         intel-oneapi-compiler-dpcpp-cpp \
         intel-oneapi-ipp-devel \
         intel-oneapi-ippcp-devel \
-        intel-oneapi-mkl-devel
+        intel-oneapi-mkl-devel \
+        intel-hpckit
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
