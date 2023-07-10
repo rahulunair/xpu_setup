@@ -48,6 +48,7 @@ sudo apt-get install -y \
     pkg-config \
     build-essential \
     cmake \
+    cmake-curses-gui \
     neovim \
     vim \
     cpufrequtils \
