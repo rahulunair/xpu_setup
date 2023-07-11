@@ -47,6 +47,7 @@ sudo apt-get update
 sudo apt-get install -y \
     pkg-config \
     build-essential \
+    environment-modules \
     cmake \
     neovim \
     vim \
