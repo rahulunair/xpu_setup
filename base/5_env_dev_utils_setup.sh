@@ -1,4 +1,4 @@
-#!/bin/bash
+cs#!/bin/bash
 
 set -e
 export DEBIAN_FRONTEND=noninteractive
@@ -49,6 +49,7 @@ sudo apt-get install -y \
     build-essential \
     environment-modules \
     cmake \
+    cmake-curses-gui \
     neovim \
     vim \
     cpufrequtils \
@@ -60,6 +61,7 @@ sudo apt-get install -y \
     libncurses5 \
     libncurses-dev \
     automake \
+    emacs \
     libcurl4-openssl-dev
 
 # set CPU governor to performance
