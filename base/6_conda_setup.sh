@@ -63,8 +63,11 @@ install_ai_packages() {
             sudo $CONDA_PATH run -n $env python -m pip install openvino-dev
         elif [[ "$env" == "tensorflow_xpu" ]] ; then
             sudo $CONDA_PATH run -n $env python -m pip install --upgrade intel-extension-for-tensorflow[gpu]
+            sudo $CONDA_PATH run -n $env python -m pip intel-optimization-for-horovod
         elif [[ "$env" == "pytorch_xpu" ]] ; then
             sudo $CONDA_PATH run -n $env python -m pip install torch==1.13.0a0+git6c9b55e intel_extension_for_pytorch==1.13.120+xpu -f https://developer.intel.com/ipex-whl-stable-xpu
+            sudo $CONDA_PATH run -n $env python -m pip install matplotlib torchvision pillow transformer intel-optimization-for-horovod
+            sudo $CONDA_PATH run -n $env python -m pip install oneccl_bind_pt -f https://developer.intel.com/ipex-whl-stable-xpu
         fi
     done
 }
