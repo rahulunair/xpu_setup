@@ -24,6 +24,9 @@ sudo apt update &&\
   sudo apt autoremove
 
 # Reboot
-colored_output "Rebooting the system in 10 seconds..." blue
-sleep 10
-sudo reboot
+if [ -z "$OMMIT_REBOOT" ]
+then
+    colored_output "Rebooting the system in 10 seconds..." blue
+    sleep 10
+    sudo reboot
+fi
