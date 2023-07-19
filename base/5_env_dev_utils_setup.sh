@@ -61,7 +61,8 @@ sudo apt-get install -y \
     libncurses-dev \
     automake \
     libcurl4-openssl-dev \
-    unzip
+    unzip \
+    p7zip
 
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
