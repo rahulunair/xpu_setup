@@ -62,7 +62,9 @@ sudo apt-get install -y \
     automake \
     libcurl4-openssl-dev \
     unzip \
-    p7zip
+    p7zip \
+    zlib1g \
+    hdf5-tools
 
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
