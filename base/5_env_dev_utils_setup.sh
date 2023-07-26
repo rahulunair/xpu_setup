@@ -64,7 +64,8 @@ sudo apt-get install -y \
     unzip \
     p7zip \
     zlib1g \
-    hdf5-tools
+    hdf5-tools \
+    libpugixml-dev
 
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
