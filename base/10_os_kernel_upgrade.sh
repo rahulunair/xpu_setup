@@ -50,3 +50,5 @@ colored_output "Updating grub again..." blue
 update-grub
 
 colored_output "Kernel update completed successfully" green
+colored_output "Pleaes Reboot the system..." blue
+#reboot -h now
