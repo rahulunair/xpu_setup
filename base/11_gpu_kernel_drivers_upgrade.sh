@@ -45,5 +45,5 @@ colored_output "Installing Intel i915 DKMS and XPU SMI..." blue
 apt-get install -y intel-i915-dkms xpu-smi
 
 # Reboot the system
-colored_output "Rebooting the system..." blue
-reboot -h now
+colored_output "Pleaes Reboot the system..." blue
+#reboot -h now
