@@ -25,6 +25,7 @@ add_intel_repository() {
     sudo apt update
 }
 
+# added full basekit, hpckit and renderkit as well.
 install_packages() {
     colored_output "Installing Intel Base Kit packages..." blue
     sudo apt-get install -y \
@@ -40,7 +41,10 @@ install_packages() {
         intel-oneapi-compiler-dpcpp-cpp \
         intel-oneapi-ipp-devel \
         intel-oneapi-ippcp-devel \
-        intel-oneapi-mkl-devel
+        intel-oneapi-mkl-devel \
+        intel-basekit \
+        intel-hpckit \
+        intel-renderkit
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
