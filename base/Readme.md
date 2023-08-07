@@ -75,3 +75,34 @@ Sets up a message of the day for the devcloud user, displaying available GPU and
 sudo ./9_cleanup.sh
 ```
 Finally, updates and removes any packages that can be autoremoved.
+
+10. Upgrade kernel
+
+Upgrade os kernel to latest 5.15 LTS
+
+``bash
+sudo ./10_os_kernel_upgrade.sh
+```
+
+11. GPU kernel drivers
+
+```bash
+sudo ./11_gpu_kernel_drivers_upgrade.sh	
+```
+
+Upgrade kernel drivers to latest
+
+12. Upgrade usermod drivers
+
+Add and upgrade any missing usermod drivers for GPU
+
+```bash
+sudo ./12_usermod_driver_upgrade.sh
+```
+
+Cleanup
+
+```bash
+sudo ./9_cleanup.sh
+```
+Finally, updates and removes any packages that can be autoremoved. (once more, just to be sure.)
