@@ -82,7 +82,7 @@ Finally, updates and removes any packages that can be autoremoved.
 
 Upgrade os kernel to latest 5.15 LTS
 
-``bash
+```bash
 sudo ./10_os_kernel_upgrade.sh
 ```
 
