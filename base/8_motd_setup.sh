@@ -9,7 +9,7 @@ echo -e "\033[1;33mWARNING:\033[0m Kernel and GPU drivers have been intentionall
 echo -e "Feel free to update the system, but please \033[1;31mrefrain from changing\033[0m the kernel and GPU"
 echo -e "drivers to maintain a stable and supported environment."
 echo ""
-echo -e "\033[1;34mThis system has the Intel Base-kit installed. To activate it, enter:\033[0m"
+echo -e "\033[1;34mThis system has the Intel Base-kit (HPC Kit and Render Kit) installed. To activate it, enter:\033[0m"
 echo -e "source /opt/intel/oneapi/setvars.sh"
 echo -e "Additional oneAPI components can be installed using apt install <package-name>," 
 echo -e "For e.g: sudo apt install intel-hpckit, for more info, visit:"
