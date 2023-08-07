@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# Set environment variables
 export DEBIAN_FRONTEND=noninteractive
 
-# Alias sudo to keep environment variables
 alias sudo='sudo -E'
 
-# Function for colored output
 colored_output() {
     local text="$1"
     local color="$2"
@@ -20,18 +17,15 @@ colored_output() {
     esac
 }
 
-# Check if the script is run as root
 if [[ $EUID -ne 0 ]]; then
    colored_output "This script must be run as root" red
    exit 1
 fi
 
-# Update package lists
 colored_output "Updating package lists..." blue
 apt-get update
 
-# Install compute and media runtimes
-colored_output "Installing compute and media runtimes..." blue
+colored_output "Reinstalling compute and media runtimes if anything is missing..." blue
 apt-get install -y \
   intel-opencl-icd intel-level-zero-gpu level-zero \
   intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 \
@@ -39,7 +33,6 @@ apt-get install -y \
   libglapi-mesa libgles2-mesa-dev libglx-mesa0 libigdgmm12 libxatracker2 mesa-va-drivers \
   mesa-vdpau-drivers mesa-vulkan-drivers va-driver-all vainfo hwinfo clinfo
 
-# Install development packages
 colored_output "Installing development packages..." blue
 apt-get install -y \
   libigc-dev intel-igc-cm libigdfcl-dev libigfxcmrt-dev level-zero-dev
