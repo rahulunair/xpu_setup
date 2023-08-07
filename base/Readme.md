@@ -101,3 +101,5 @@ Add and upgrade any missing usermod drivers for GPU
 ```bash
 sudo ./12_usermod_driver_upgrade.sh
 ```
+
+"🎉 Congratulations! 🎉 Your system is now fully equipped with the latest supported kernel and drivers. Time to dive in and start creating. Happy Hacking! 💻🚀"
