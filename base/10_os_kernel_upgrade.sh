@@ -25,6 +25,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+# unhold held out package
+sudo apt-mark unhold $(apt-mark showhold)
+
 colored_output "Updating package lists..." blue
 apt-get update
 
