@@ -86,19 +86,19 @@ sudo ./10_os_kernel_upgrade.sh
 ```
 🔝 Upgrade OS kernel to latest 5.15 LTS.
 
-11. 🛠️ Upgrade Usermod Drivers
+11. 🔨 Upgrade Usermod Drivers
 
 ```bash
 sudo ./11_gpu_kernel_drivers_upgrade.sh	
 ```
 
-🔨 Add and upgrade any missing usermod drivers for GPU.
+🎬 Upgrade kernel drivers to latest available version from Intel GPU repos.
 
 12. 🛠️ Upgrade Usermod Drivers
 
 ```bash
 sudo ./12_usermod_driver_upgrade.sh
 ```
-🔨 Add and upgrade any missing usermod drivers for GPU.
+🛠️  Add and upgrade any missing usermod drivers for GPU.
 
 "🎉 Congratulations! 🎉 Your system is now fully equipped with the latest supported kernel and drivers. Time to dive in and start creating. Happy Hacking! 💻🚀"
