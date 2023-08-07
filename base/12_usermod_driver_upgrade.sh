@@ -37,5 +37,7 @@ colored_output "Installing development packages..." blue
 apt-get install -y \
   libigc-dev intel-igc-cm libigdfcl-dev libigfxcmrt-dev level-zero-dev
 
-colored_output "Upgrading packages..." blue
-sudo apt-get -y upgrade
+colored_output "Upgrading and autoremoving packages that are not required.."
+sudo apt update &&\
+  sudo apt upgrade -y &&\
+  sudo apt autoremove
