@@ -80,11 +80,11 @@ Finally, updates and removes any packages that can be autoremoved.
 
 10. Upgrade kernel
 
-Upgrade os kernel to latest 5.15 LTS
-
 ```bash
 sudo ./10_os_kernel_upgrade.sh
 ```
+Upgrade os kernel to latest 5.15 LTS
+
 
 11. GPU kernel drivers
 
