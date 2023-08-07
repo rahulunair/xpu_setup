@@ -5,7 +5,7 @@ export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 
-USERNAME="devcloud"
+USERNAME="devcloud"  # placeholder user, choose whatever username you desire.
 INSTALL_DOCKER=true
 
 for arg in "$@"
