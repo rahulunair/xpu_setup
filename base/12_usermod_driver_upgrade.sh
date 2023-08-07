@@ -23,7 +23,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 colored_output "Updating package lists..." blue
-apt-get update
+sudo apt-get update
 
 colored_output "Reinstalling compute and media runtimes if anything is missing..." blue
 apt-get install -y \
@@ -36,3 +36,6 @@ apt-get install -y \
 colored_output "Installing development packages..." blue
 apt-get install -y \
   libigc-dev intel-igc-cm libigdfcl-dev libigfxcmrt-dev level-zero-dev
+
+colored_output "Upgrading packages..." blue
+sudo apt-get -y upgrade
