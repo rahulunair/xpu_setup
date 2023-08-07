@@ -67,7 +67,8 @@ sudo apt-get install -y \
     hdf5-tools \
     libpugixml-dev \
     numactl \
-    emacs-nox
+    emacs-nox \
+    cmake-curses-gui
 
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
