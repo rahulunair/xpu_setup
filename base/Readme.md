@@ -13,7 +13,7 @@
 
 ```bash
 sudo ./1_init_setup.sh
-
+```
 
 Updates and upgrades the operating system, and installs essential tools required for further setup.
 
