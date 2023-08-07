@@ -2,6 +2,8 @@
 
 ⚠️ **Warning**: Follow these steps **in order** to set up your Intel GPU dGPU server.
 
+**Update**: Added some upgrade scripts as well (10 to 12 steps), please run those after the setup as given in the readme
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/786476/234943097-683fd36e-e032-40e2-b3f6-0ec2933722b8.png" width="500" alt="Branches Screenshot">
 </p>
