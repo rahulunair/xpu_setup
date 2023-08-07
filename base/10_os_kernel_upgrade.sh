@@ -41,7 +41,8 @@ colored_output "Latest 5.15.x kernel version found: ${KERNEL_VERSION}" green
 
 # Install the specific kernel version
 colored_output "Installing the specific kernel version..." blue
-apt-get install -y "linux-image-${KERNEL_VERSION}-generic"
+apt-get install -y --install-suggests "linux-image-${KERNEL_VERSION}-generic"
+apt-get install -y  "linux-headers-${KERNEL_VERSION}-generic"
 
 colored_output "Updating grub..." blue
 update-grub
