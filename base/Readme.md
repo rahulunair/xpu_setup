@@ -101,10 +101,3 @@ Add and upgrade any missing usermod drivers for GPU
 ```bash
 sudo ./12_usermod_driver_upgrade.sh
 ```
-
-Cleanup
-
-```bash
-sudo ./9_cleanup.sh
-```
-Finally, updates and removes any packages that can be autoremoved. (once more, just to be sure.)
