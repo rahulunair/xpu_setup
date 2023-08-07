@@ -24,7 +24,7 @@ if [[ $EUID -ne 0 ]]; then
    colored_output "This script must be run as root" red
    exit 1
 fi
-
+CURRENT_KERNEL=$(uname -r)
 # unhold held out package
 sudo apt-mark unhold $(apt-mark showhold)
 
@@ -47,7 +47,8 @@ colored_output "Updating grub..." blue
 update-grub
 
 colored_output "Setting the default kernel..." blue
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux '${KERNEL_VERSION}-generic'"/g' /etc/default/grub
+#sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux '${CURRENT_KERNEL}-generic'"/g' /etc/default/grub
+sed -i 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT=0/g' /etc/default/grub
 
 colored_output "Updating grub again..." blue
 update-grub
