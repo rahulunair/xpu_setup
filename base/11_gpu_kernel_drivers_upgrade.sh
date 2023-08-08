@@ -34,13 +34,17 @@ rm -rf /etc/apt/sources.list.d/intel-gpu-jammy.list
 rm -rf /usr/share/keyrings/intel-graphics.gpg
 
 # we might not need this ?
-colored_output "Adding the unified repository for Intel Data Center GPU Flex and Max Series production releases..." blue
-wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu jammy/production/2328 unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
+# colored_output "Adding the unified repository for Intel Data Center GPU Flex and Max Series production releases..." blue
+# wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
+# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu jammy/production/2328 unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
 
-colored_output "Adding the unified repository for Intel Data Center GPU Flex and Max Series rolling stable releases..." blue
-wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu jammy unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
+# colored_output "Adding the unified repository for Intel Data Center GPU Flex and Max Series rolling stable releases..." blue
+# wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
+# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu jammy unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
+
+# sometimes the key signing has issues
+echo "deb [arch=amd64 trusted=yes] https://repositories.intel.com/gpu/ubuntu jammy/production/2328 unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
+
 
 colored_output "Updating package lists..." blue
 apt-get update
