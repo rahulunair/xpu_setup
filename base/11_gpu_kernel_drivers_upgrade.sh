@@ -42,6 +42,7 @@ rm -rf /usr/share/keyrings/intel-graphics.gpg
 # wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
 # echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu jammy unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
 
+colored_output "**Note**: Trusting intel repos (lazy...) ..." red
 # sometimes the key signing has issues
 echo "deb [arch=amd64 trusted=yes] https://repositories.intel.com/gpu/ubuntu jammy/production/2328 unified" | tee /etc/apt/sources.list.d/intel-gpu-jammy.list
 
