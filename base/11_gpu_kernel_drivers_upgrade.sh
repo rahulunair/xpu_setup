@@ -29,6 +29,10 @@ apt-get update
 colored_output "Installing gpg-agent and wget..." blue
 apt-get install -y gpg-agent wget
 
+# remove sources list and keys for gpu drivers if exists
+rm -rf /etc/apt/sources.list.d/intel-gpu-jammy.list
+rm -rf /usr/share/keyrings/intel-graphics.gpg
+
 # we might not need this ?
 colored_output "Adding the unified repository for Intel Data Center GPU Flex and Max Series production releases..." blue
 wget -qO - https://repositories.intel.com/gpu/intel-graphics.key | gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
