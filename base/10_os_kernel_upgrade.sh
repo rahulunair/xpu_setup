@@ -28,6 +28,9 @@ CURRENT_KERNEL=$(uname -r)
 # unhold held out package
 sudo apt-mark unhold $(apt-mark showhold)
 
+# add proposed jammy repo - to get the latest patches
+echo "deb http://archive.ubuntu.com/ubuntu/ jammy-proposed restricted main multiverse universe" | sudo tee /etc/apt/sources.list.d/ubuntu-jammy-proposed.list
+
 colored_output "Updating package lists..." blue
 apt-get update
 
