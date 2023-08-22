@@ -25,25 +25,13 @@ add_intel_repository() {
     sudo apt update
 }
 
-# added full basekit, hpckit and renderkit as well.
+# added full basekit, hpckit, aikit and renderkit as well.
 install_packages() {
     colored_output "Installing Intel Base Kit packages..." blue
     sudo apt-get install -y \
-        intel-oneapi-common-vars \
-        intel-oneapi-common-licensing \
-        intel-oneapi-dpcpp-ct \
-        intel-oneapi-dev-utilities \
-        intel-oneapi-dpcpp-debugger \
-        intel-oneapi-libdpstd-devel \
-        intel-oneapi-diagnostics-utility \
-        intel-oneapi-tbb-devel \
-        intel-oneapi-ccl-devel \
-        intel-oneapi-compiler-dpcpp-cpp \
-        intel-oneapi-ipp-devel \
-        intel-oneapi-ippcp-devel \
-        intel-oneapi-mkl-devel \
         intel-basekit \
         intel-hpckit \
+        intel-aikit \
         intel-renderkit
 }
 
