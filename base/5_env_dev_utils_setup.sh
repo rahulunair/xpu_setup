@@ -70,7 +70,8 @@ sudo apt-get install -y \
     emacs-nox \
     cmake-curses-gui \
     p7zip-full \
-    numactl
+    numactl \
+    g++-12
 
 # set CPU governor to performance
 colored_output "Setting CPU governor to performance..." blue
