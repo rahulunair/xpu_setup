@@ -36,13 +36,6 @@ The essential components for setting up a GPU device in the repo has the followi
 │   ├── [08_motd_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/8_motd_setup.sh)           | Customize the server login message               |
 │   ├── [09_cleanup.sh](https://github.com/rahulunair/xpu_setup/blob/main/base/9_cleanup.sh)              | Clean up any unnecessary packages and files      |
 │   └── Readme.md
-├── optional_components
-│   ├── hpc
-│   ├── [01_hpckit_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/optional_components/hpc/01_hpckit_setup.sh)        | Install hpckit in addition to base development toolkit        |
-│   └── [02_motd_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/optional_components/hpc/8_motd_setup.sh)           | Customize the server login message               |
-│   └── renderkit
-│       ├── [01_renderkit_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/optional_components/renderkit/01_renderkit_setup.sh)           | Install renderkit in addition to base environment      |
-│       └── [02_motd_setup.sh](https://github.com/rahulunair/xpu_setup/blob/main/optional_components/renderkit/8_motd_setup.sh)           | Customize the server login message               |
 ├── test.md
 └── utils
     └── update_kernel.py
