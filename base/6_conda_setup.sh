@@ -64,9 +64,20 @@ install_ai_packages() {
         elif [[ "$env" == "tensorflow_xpu" ]] ; then
             sudo $CONDA_PATH run -n $env python -m pip install --upgrade intel-extension-for-tensorflow[gpu]
         elif [[ "$env" == "pytorch_xpu" ]] ; then
-            sudo $CONDA_PATH run -n $env python -m pip install torch==2.0.1a0 torchvision==0.15.2a0 intel_extension_for_pytorch==2.0.110+xpu -f https://developer.intel.com/ipex-whl-stable-xpu
+            sudo $CONDA_PATH run -n $env python -m pip install torch==2.1.0a0 torchvision==0.16.0a0 torchaudio==2.1.0a0 intel-extension-for-pytorch==2.1.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
+
         fi
     done
+        echo "setting up distributed env with pytorch, bigdl and deepspeed in llm_xpu environment"
+        sudo $CONDA_PATH create -n pytorch_xpu python=3.9 -y
+        sudo $CONDA_PATH run -n $env python -m pip install torch==2.1.0a0 torchvision==0.16.0a0 torchaudio==2.1.0a0 intel-extension-for-pytorch==2.1.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
+        sudo $CONDA_PATH run -n llm_xpu python -m pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
+        sudo $CONDA_PATH run -n llm_xpu python -m pip datasets transformers==4.34.0 peft==0.5.0 accelerate==0.23.0
+        sudo $CONDA_PATH run -n llm_xpu python -m pip install oneccl_bind_pt==2.1.100 -f https://developer.intel.com/ipex-whl-stable-xpu
+        source /opt/intel/oneapi/setvars.sh --force
+        sudo $CONDA_PATH run -n llm_xpu python -m pip install git+https://github.com/microsoft/DeepSpeed.git@4fc181b0
+        sudo $CONDA_PATH run -n llm_xpu python -m pip install git+https://github.com/intel/intel-extension-for-deepspeed.git@ec33277
+        sudo $CONDA_PATH run -n llm_xpu python -m pip install mpi4py
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
