@@ -18,12 +18,12 @@ colored_output() {
 
 add_intel_repository() {
     colored_output "Adding Intel oneAPI repository..." blue
-    wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-    sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-    sudo rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-    echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+    wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \
+    | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+    echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
     sudo apt update
 }
+
 
 # added full basekit, hpckit, aikit and renderkit as well.
 install_packages() {
