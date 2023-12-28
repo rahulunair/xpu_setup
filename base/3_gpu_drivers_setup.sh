@@ -75,6 +75,9 @@ sudo apt-get install -y \
   level-zero-dev \
   libdrm-dev
 
+
+# update PCIE IDs:
+sudo /usr/sbin/update-pciids
 # Reboot
 if [ -z "$OMMIT_REBOOT" ]
 then
