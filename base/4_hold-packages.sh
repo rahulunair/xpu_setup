@@ -12,10 +12,20 @@ colored_output() {
     esac
 }
 
-KERNEL_VERSION="5.15.0-73"
+
+MIN_KERNEL_VERSION="5.15.0"
+
+# Check kernel version
+colored_output "Checking kernel version..." blue
+KERNEL_VERSION=$(uname -r | cut -d'-' -f1)
+if [[ "$(printf '%s\n' "$MIN_KERNEL_VERSION" "$CURRENT_KERNEL_VERSION" | sort -V | head -n1)" != "$MIN_KERNEL_VERSION" ]]; then
+    colored_output "Error: Kernel version must be $MIN_KERNEL_VERSION or higher." red
+    exit 1
+fi
+
 KERNEL_PACKAGE="linux-image-${KERNEL_VERSION}-generic"
 KERNEL_HEADER_PACKAGE="linux-headers-${KERNEL_VERSION}-generic"
-INTEL_PACKAGES=("intel-i915-dkms" "intel-fw-gpu" "intel-platform-vsec-dkms" "intel-platform-cse-dkms")
+INTEL_PACKAGES=("intel-i915-dkms" "intel-fw-gpu")
 
 colored_output "Holding kernel, kernel headers, and Intel packages..." blue
 sudo apt-mark hold ${KERNEL_PACKAGE} ${KERNEL_HEADER_PACKAGE} ${INTEL_PACKAGES[@]}
