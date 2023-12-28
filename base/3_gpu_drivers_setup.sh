@@ -5,8 +5,9 @@ export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
 set -e
 
-KERNEL_VERSION="5.15.0-73"
-REPO_URL="https://repositories.intel.com/graphics"
+MIN_KERNEL_VERSION="5.15.0"
+#KERNEL_VERSION="5.15.0-73"
+REPO_URL="https://repositories.intel.com/gpu"
 REPO_KEY_URL="${REPO_URL}/intel-graphics.key"
 REPO_LIST_FILE="/etc/apt/sources.list.d/intel.gpu.jammy.list"
 
@@ -25,8 +26,9 @@ colored_output() {
 
 # Check kernel version
 colored_output "Checking kernel version..." blue
-if [[ "$(uname -r)" != "${KERNEL_VERSION}-generic" ]]; then
-    colored_output "Error: Incorrect kernel version. Please run setup_kernel.sh first." red
+CURRENT_KERNEL_VERSION=$(uname -r | cut -d'-' -f1)
+if [[ "$(printf '%s\n' "$MIN_KERNEL_VERSION" "$CURRENT_KERNEL_VERSION" | sort -V | head -n1)" != "$MIN_KERNEL_VERSION" ]]; then
+    colored_output "Error: Kernel version must be $MIN_KERNEL_VERSION or higher." red
     exit 1
 fi
 
@@ -35,7 +37,7 @@ colored_output "Adding package repository..." blue
 sudo apt-get install -y gpg-agent wget
 wget -qO - "${REPO_KEY_URL}" | \
   sudo gpg --dearmor | sudo sh -c "cat > /usr/share/keyrings/intel-graphics.gpg"
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/graphics/ubuntu jammy max" | \
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/graphics/ubuntu jammy unified" | \
   sudo tee "${REPO_LIST_FILE}"
 
 # Install dependencies
@@ -51,9 +53,8 @@ sudo apt-get -y install \
 # https://dgpu-docs.intel.com/driver/installation.html#ubuntu-server
 # package names for dkms drivers changed, updated with latest one
 colored_output "Installing DKMS kernel modules..." blue
-#sudo apt-get install -y intel-platform-vsec-dkms intel-platform-cse-dkms
-#sudo apt-get install -y intel-i915-dkms intel-fw-gpu
-sudo apt-get install -y intel-i915-dkms
+sudo apt-get install -y flex bison
+sudo apt-get install -y  intel-fw-gpu intel-i915-dkms xpu-smi
 
 # Install run-time packages
 colored_output "Installing run-time packages..." blue
@@ -62,7 +63,7 @@ sudo apt-get install -y \
   intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 \
   libegl-mesa0 libegl1-mesa libegl1-mesa-dev libgbm1 libgl1-mesa-dev libgl1-mesa-dri \
   libglapi-mesa libgles2-mesa-dev libglx-mesa0 libigdgmm12 libxatracker2 mesa-va-drivers \
-  mesa-vdpau-drivers mesa-vulkan-drivers va-driver-all vainfo
+  mesa-vdpau-drivers mesa-vulkan-drivers va-driver-all vainfo hwinfo clinfo
 
 # OPTIONAL: Install developer packages
 colored_output "Installing developer packages..." blue
