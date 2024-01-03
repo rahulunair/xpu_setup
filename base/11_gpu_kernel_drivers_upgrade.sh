@@ -63,7 +63,7 @@ colored_output "Updating package lists..." blue
 apt-get update
 exit_on_error $? "Failed to update package lists after adding repo."
 
-apt-mark unhold intel-i915-dkms xpu-smi intel-fw-gpu
+apt-mark unhold $(apt-mark showhold)
 colored_output "Installing Intel GPU FW, i915 DKMS and XPU SMI..." blue
 apt-get install -y intel-i915-dkms xpu-smi intel-fw-gpu
 exit_on_error $? "Failed to install Intel i915 DKMS and XPU SMI."
