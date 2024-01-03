@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root or with sudo privileges."
+   exit 1
+fi
+
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 alias sudo="sudo -E"
@@ -34,16 +39,16 @@ fi
 
 # Add package repository
 colored_output "Adding package repository..." blue
-sudo apt-get install -y gpg-agent wget
+apt-get install -y gpg-agent wget
 wget -qO - "${REPO_KEY_URL}" | \
-  sudo gpg --dearmor | sudo sh -c "cat > /usr/share/keyrings/intel-graphics.gpg"
+  gpg --dearmor | sh -c "cat > /usr/share/keyrings/intel-graphics.gpg"
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/graphics/ubuntu jammy unified" | \
-  sudo tee "${REPO_LIST_FILE}"
+  tee "${REPO_LIST_FILE}"
 
 # Install dependencies
 colored_output "Installing dependencies..." blue
-sudo apt-get update
-sudo apt-get -y install \
+apt-get update
+apt-get -y install \
     gawk \
     dkms \
     linux-headers-$(uname -r) \
@@ -53,12 +58,12 @@ sudo apt-get -y install \
 # https://dgpu-docs.intel.com/driver/installation.html#ubuntu-server
 # package names for dkms drivers changed, updated with latest one
 colored_output "Installing DKMS kernel modules..." blue
-sudo apt-get install -y flex bison
-sudo apt-get install -y  intel-fw-gpu intel-i915-dkms xpu-smi
+apt-get install -y flex bison
+apt-get install -y  intel-fw-gpu intel-i915-dkms xpu-smi
 
 # Install run-time packages
 colored_output "Installing run-time packages..." blue
-sudo apt-get install -y \
+apt-get install -y \
   intel-opencl-icd intel-level-zero-gpu level-zero \
   intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 \
   libegl-mesa0 libegl1-mesa libegl1-mesa-dev libgbm1 libgl1-mesa-dev libgl1-mesa-dri \
@@ -67,7 +72,7 @@ sudo apt-get install -y \
 
 # OPTIONAL: Install developer packages
 colored_output "Installing developer packages..." blue
-sudo apt-get install -y \
+apt-get install -y \
   libigc-dev \
   intel-igc-cm \
   libigdfcl-dev \
@@ -77,11 +82,12 @@ sudo apt-get install -y \
 
 
 # update PCIE IDs:
-sudo /usr/sbin/update-pciids
+/usr/sbin/update-pciids
+
 # Reboot
 if [ -z "$OMMIT_REBOOT" ]
 then
     colored_output "Rebooting the system in 10 seconds..." blue
     sleep 10
-    sudo reboot
+    reboot
 fi
