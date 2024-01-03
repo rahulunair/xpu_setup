@@ -26,19 +26,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 CURRENT_KERNEL=$(uname -r)
 
-# hold packages related to gpu while upgrading kernel
-#sudo apt-mark hold intel-igc-cm intel-gsc libmetee libmetee-dev intel-media-va-driver-non-free \
-#    libmfx1 libmfx-tools libigfxcmrt7 libmfxgen1 libvpl2 libvpl-tools libmfx-dev libmfxgen1 intel-opencl-icd \
-#    intel-level-zero-gpu level-zero level-zero-dev initramfs-tools driverctl libva-wayland2 libva-dev libva-drm2 \
-#    libva-glx2 libva-wayland2 libva-x11-2 libva2 libgl1-mesa-dev vainfo libd3dadapter9-mesa libgl1-mesa-dri libgl1-mesa-glx \
-#    libglapi-mesa libgles2-mesa libosmesa6 mesa-common-dev mesa-va-drivers mesa-vdpau-drivers mesa-vulkan-drivers \
-#    libwayland-egl1-mesa libosmesa6-dev libglx-mesa0 libgles2-mesa-dev libd3dadapter9-mesa-dev libegl-mesa0 libegl1-mesa \
-#    libegl1-mesa-dev libgbm-dev libgbm1 grub-efi-amd64-signed shim-signed openssh-server docker.io linux-image-*  \
-#    intel-gsc libmetee libmetee-dev  intel-igc-cm
-
 
 # unhold held out package
-sudo apt-mark unhold $(apt-mark showhold)
+apt-mark unhold $(apt-mark showhold)
 
 # add proposed jammy repo - to get the latest patches
 echo "deb http://archive.ubuntu.com/ubuntu/ jammy-proposed restricted main multiverse universe" | sudo tee /etc/apt/sources.list.d/ubuntu-jammy-proposed.list
