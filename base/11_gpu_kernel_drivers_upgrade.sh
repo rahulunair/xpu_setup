@@ -3,7 +3,7 @@
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
 
-REPO_URL="https://repositories.intel.com/gpu/ubuntu"
+REPO_URL="https://repositories.intel.com/gpu"
 REPO_KEY_URL="${REPO_URL}/intel-graphics.key"
 REPO_LIST_FILE="/etc/apt/sources.list.d/intel-gpu-jammy.list"
 
@@ -52,11 +52,11 @@ rm -f /usr/share/keyrings/intel-graphics.gpg
 
 # Attempt to add the GPG key
 wget -qO - "${REPO_KEY_URL}" | gpg --dearmor -o /usr/share/keyrings/intel-graphics.gpg && \
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] ${REPO_URL} jammy unified" | tee "${REPO_LIST_FILE}"
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-graphics.gpg] ${REPO_URL}/ubuntu jammy unified" | tee "${REPO_LIST_FILE}"
 
 if [ $? -ne 0 ]; then
     colored_output "Failed to add GPG key, trusting repo without key..." yellow
-    echo "deb [arch=amd64 trusted=yes] ${REPO_URL} jammy unified" | tee "${REPO_LIST_FILE}"
+    echo "deb [arch=amd64 trusted=yes] ${REPO_URL}/ubuntu jammy unified" | tee "${REPO_LIST_FILE}"
 fi
 
 colored_output "Updating package lists..." blue
