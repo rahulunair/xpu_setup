@@ -44,6 +44,11 @@ colored_output "Installing gpg-agent and wget..." blue
 apt-get install -y gpg-agent wget
 exit_on_error $? "Failed to install gpg-agent and wget."
 
+# Remove existing pkgs
+colored_output "Removing old gpu drivers first..." blue
+apt remove -y intel-platform-cse-dkms intel-platform-vsec-dkms
+exit_on_error $? "Failed to remove."
+
 # Remove existing sources list and keys for GPU drivers if they exist
 rm -f /etc/apt/sources.list.d/intel-gpu-jammy.list
 rm -f /usr/share/keyrings/intel-graphics.gpg

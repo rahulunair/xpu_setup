@@ -27,16 +27,18 @@ apt-get install -y driverctl
 
 # Check device linked to intel-pmt
 colored_output "Checking for device linked to intel-pmt..." blue
-DEVICE=$(driverctl list-devices | grep -iE "pmt" | awk '{print $1}')
-if [ -z "$DEVICE" ]; then
+DEVICES=$(driverctl list-devices | grep -iE "pmt" | awk '{print $1}')
+if [ -z "$DEVICES" ]; then
     colored_output "No device found for intel-pmt" red
     exit 1
 fi
-colored_output "Device found: $DEVICE" green
+colored_output "Device(s) found: $DEVICES" green
 
-# Set override to intel_vsec
-colored_output "Setting override to intel_vsec for device $DEVICE..." blue
-driverctl set-override "$DEVICE" "intel_vsec"
+# Set override to intel_vsec for each device
+for DEVICE in $DEVICES; do
+    colored_output "Setting override to intel_vsec for device $DEVICE..." blue
+    driverctl set-override "$DEVICE" "intel_vsec"
+done
 
 # Verification
 colored_output "Verifying VSEC usage for Intel Data Center GPU Max Series..." blue
