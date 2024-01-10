@@ -3,13 +3,38 @@
 set -e
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
-source /opt/intel/oneapi/setvars.sh --force
+export LD_LIBRARY_PATH=/opt/intel/oneapi/intelpython/python3.9/lib/libgomp.so:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/intel/oneapi/intelpython/python3.9/lib/python3.9/site-packages/xgboost/lib/libxgboost.so:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/opt/intel/oneapi/mkl/latest/lib:$LD_LIBRARY_PATH
+export PATH=/opt/intel/oneapi/mpi/latest/bin:$PATH
+export LD_LIBRARY_PATH=/opt/intel/oneapi/mpi/latest/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=/opt/intel/oneapi/mpi/latest/include:$C_INCLUDE_PATH
+export MPICC=/opt/intel/oneapi/mpi/latest/bin/mpicc
+export PATH=/opt/intel/oneapi/ccl/latest/bin:$PATH
+export LD_LIBRARY_PATH=/opt/intel/oneapi/ccl/latest/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=/opt/intel/oneapi/ccl/latest/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/opt/intel/oneapi/ccl/latest/include:$CPLUS_INCLUDE_PATH
+
 
 alias sudo="sudo -E"
-alias sudo=" "
 AI_PKGS=false
 DEFAULT=false
+
+change_dir_ownership() {
+    local dir_path=$1
+    local action=$2
+
+    if [ "$action" == "take" ]; then
+        # Capture and return the original owner and group
+        local original_owner=$(stat -c '%U:%G' $dir_path)
+        sudo chown -R $(whoami) $dir_path
+        echo $original_owner
+    elif [ "$action" == "restore" ]; then
+        # Restore to the original owner and group
+        local original_owner=$3
+        sudo chown -R $original_owner $dir_path
+    fi
+}
 
 colored_output() {
     text=$1
@@ -75,59 +100,48 @@ get_default_python_version() {
     fi
 }
 
-
+get_conda_envs_dir() {
+    local conda_executable=$(get_conda_path)
+    local envs_dir=$($conda_executable info --envs | grep 'base' | awk '{print $3}')
+    echo $envs_dir
+}
 
 install_ai_packages() {
     local CONDA_PATH=$(get_conda_path)
     local DEFAULT_PYTHON_VERSION=$(get_default_python_version)
-    local envs=("pytorch_xpu") #("pytorch_cpu" "tensorflow_cpu" "openvino" "pytorch_xpu" "tensorflow_xpu")
-
+    local oneccl_bind_python_version=$(echo $DEFAULT_PYTHON_VERSION | tr -d '.')
+    local conda_envs_dir=$(get_conda_envs_dir)
+    local original_owner=$(change_dir_ownership $conda_envs_dir "take")
+    local envs=("pytorch-gpu-latest") #("pytorch-cpu" "tensorflow-cpu" "openvino" "pytorch-gpu-latest" "tensorflow-gpu-latest")
+    echo "Using default python version ${DEFAULT_PYTHON_VERSION}"
     for env in ${envs[@]}
     do
-        sudo $CONDA_PATH create -n $env python=$DEFAULT_PYTHON_VERSION -y
-        sudo $CONDA_PATH run -n $env pip install ipython jupyterlab ipykernel
+        $CONDA_PATH create -n $env python=$DEFAULT_PYTHON_VERSION -y
+	local python_executable=$($CONDA_PATH run -n $env which python)
+
+        $python_executable -m pip install ipython jupyterlab ipykernel
         if [[ "$env" == "pytorch_cpu" ]] ; then
-            sudo $CONDA_PATH run -n $env pip install intel_extension_for_pytorch -f https://developer.intel.com/ipex-whl-stable-cpu
-            sudo $CONDA_PATH run -n $env pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+            $python_executable -m pip install intel_extension_for_pytorch -f https://developer.intel.com/ipex-whl-stable-cpu
+            $python_executable -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
         elif [[ "$env" == "tensorflow_cpu" ]] ; then
-            sudo $CONDA_PATH run -n $env pip install --upgrade intel-extension-for-tensorflow[cpu]
+            $python_executable -m pip install --upgrade intel-extension-for-tensorflow[cpu]
         elif [[ "$env" == "openvino" ]] ; then
-            sudo $CONDA_PATH run -n $env pip install openvino
-            sudo $CONDA_PATH run -n $env pip install openvino-dev
-        elif [[ "$env" == "tensorflow_xpu" ]] ; then
-            sudo $CONDA_PATH run -n $env pip install --upgrade intel-extension-for-tensorflow[gpu]
-        elif [[ "$env" == "pytorch_xpu" ]] ; then
-            #sudo $CONDA_PATH run -n $env pip install torch==2.1.0a0 torchvision==0.16.0a0 torchaudio==2.1.0a0 intel-extension-for-pytorch==2.1.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
-	    #sudo $CONDA_PATH run -n $env pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
-	    #sudo $CONDA_PATH run -n $env pip install datasets transformers==4.34.0 peft==0.5.0 accelerate==0.23.0
-	    #sudo $CONDA_PATH run -n $env pip install https://intel-extension-for-pytorch.s3.amazonaws.com/ipex_stable/xpu/oneccl_bind_pt-2.1.100%2Bxpu-cp39-cp39-linux_x86_64.whl 
-	    
-	    # build and install deepspeed
-	    local tmp_build_dir=$(mktemp -d)
-            git clone https://github.com/microsoft/DeepSpeed.git "$tmp_build_dir/DeepSpeed"
-            pushd "$tmp_build_dir/DeepSpeed"
-            git checkout 4fc181b0
-            $CONDA_PATH run -n $env python setup.py bdist_wheel
-            local wheel_path=$(find . -name 'deepspeed*.whl')
-            popd
-            sudo $CONDA_PATH run -n $env pip install "$tmp_build_dir/DeepSpeed/$wheel_path"
-            #rm -rf "$tmp_build_dir"
-	    
-	    # build & install intel extension for deepspeed
-	    local tmp_build_dir_intel=$(mktemp -d)
-	    git clone https://github.com/intel/intel-extension-for-deepspeed.git "$tmp_build_dir_intel/intel-extension-for-deepspeed"
-	    pushd "$tmp_build_dir_intel/intel-extension-for-deepspeed"
-	    git checkout ec33277
-	    $CONDA_PATH run -n $env python setup.py bdist_wheel
-	    local wheel_path_intel=$(find . -name 'intel_extension_for_deepspeed*.whl')
-	    popd
-	    sudo $CONDA_PATH run -n $env pip install "$tmp_build_dir_intel/intel-extension-for-deepspeed/$wheel_path_intel"
-    	    
-	    #rm -rf "$tmp_build_dir_intel"
-	    #sudo $CONDA_PATH run -n $env pip install git+https://github.com/microsoft/DeepSpeed.git@4fc181b0
-	    #sudo $CONDA_PATH run -n $env pip install git+https://github.com/intel/intel-extension-for-deepspeed.git@ec33277
-	    sudo $CONDA_PATH run -n $env pip install mpi4py scipy bitsandbytes
-	    sudo $CONDA_PATH run -n $env -c conda-forge -y gperftools=2.10
+            $python_exectuable -m pip install openvino
+            $python_executable -m pip install openvino-dev
+        elif [[ "$env" == "tensorflow-gpu-latest" ]] ; then
+            $python_executable -m pip install --upgrade intel-extension-for-tensorflow[gpu]
+        elif [[ "$env" == "pytorch-gpu-latest" ]] ; then
+            $python_executable -m pip install torch==2.1.0a0 torchvision==0.16.0a0 torchaudio==2.1.0a0 intel-extension-for-pytorch==2.1.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
+	     $python_executable -m pip install --pre --upgrade bigdl-llm[xpu_2.1] -f https://developer.intel.com/ipex-whl-stable-xpu
+	     $python_executable -m pip install datasets transformers==4.34.0 peft==0.5.0 accelerate==0.23.0
+	     $python_executable -m pip install https://intel-extension-for-pytorch.s3.amazonaws.com/ipex_stable/xpu/oneccl_bind_pt-2.1.100%2Bxpu-cp$oneccl_bind_python_version-cp$oneccl_bind_python_version-linux_x86_64.whl 
+	     $python_executable -m pip install mpi4py
+	     $python_executable -m pip install scipy bitsandbytes
+	     $python_executable -m pip install git+https://github.com/microsoft/DeepSpeed.git@4fc181b0
+	     $python_executable -m pip install git+https://github.com/intel/intel-extension-for-deepspeed.git@ec33277
+	    $CONDA_PATH install -c conda-forge -y gperftools=2.10
+	    change_dir_ownership $conda_envs_dir "restore" $original_owner
+
         fi
     done
 }

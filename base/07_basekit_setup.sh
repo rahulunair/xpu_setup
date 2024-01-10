@@ -29,10 +29,19 @@ add_intel_repository() {
 install_packages() {
     colored_output "Installing Intel Base Kit packages..." blue
     sudo apt-get install -y \
-        intel-basekit \
-        intel-hpckit \
-        intel-aikit \
-        intel-renderkit
+    intel-basekit \
+    intel-hpckit \
+    intel-aikit-getting-started \
+    intel-oneapi-common-vars \
+    intel-oneapi-common-licensing \
+    intel-oneapi-dev-utilities \
+    intel-oneapi-model-zoo \
+    intel-oneapi-python \
+    intel-oneapi-tensorflow \
+    intel-oneapi-neural-compressor \
+    intel-oneapi-pytorch \
+    intel-oneapi-modin \
+    intel-renderkit
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
